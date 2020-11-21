@@ -31,7 +31,7 @@ const DisplayOptions = () => {
   const dispatchDisplayOption = useContext(DispatchDisplayOptionContext);
 
   return (
-    <ToggleButtonGroup className={classes.root}>
+    <ToggleButtonGroup className={classes.root} data-testid="display-options">
       <ToggleButton
         className={cx({
           [classes["display-options__button"]]: true,

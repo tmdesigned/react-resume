@@ -8,7 +8,7 @@ const Overview = () => {
   const classes = useCardStyles();
 
   return (
-    <Card>
+    <Card data-testid="overview">
       <CardContent>
         <h1 className={classes.header}>
           {person.firstName} {person.lastName}
