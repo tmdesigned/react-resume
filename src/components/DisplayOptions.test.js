@@ -119,7 +119,6 @@ describe("has a working 'show details' toggle", () => {
 
     await waitFor(() => {
       sampleResumeCard.bullets.forEach((bullet) => {
-        expect(screen.getByText(bullet)).toBeInTheDocument();
         expect(screen.getByText(bullet)).toBeVisible();
       });
     });
