@@ -6,7 +6,7 @@ import CardMetaList from "./CardMetaList";
 import CardBulletList from "./CardBulletList";
 import DateRange from "./DateRange";
 import { useCardStyles } from "./CardStyles";
-import { DisplayOptionsContext } from "../../Contexts";
+import { DisplayOptionsContext } from "../../../Contexts";
 
 const ResumeCard = ({ title, meta, from, to, bullets }) => {
   const displayOptions = useContext(DisplayOptionsContext);

@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import WithProviders from "../WithProviders";
-import { PersonContext } from "../Contexts";
+import WithProviders from "../../WithProviders";
+import { PersonContext } from "../../Contexts";
 import Overview from "./Overview";
 
 const samplePerson = {

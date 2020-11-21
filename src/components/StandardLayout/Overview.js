@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Card, CardContent } from "@material-ui/core";
-import { PersonContext } from "../Contexts";
+import { PersonContext } from "../../Contexts";
 import { useCardStyles } from "./ResumeCard/CardStyles";
 
 const Overview = () => {

@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import WithProviders from "../WithProviders";
-import { PersonContext } from "../Contexts";
+import WithProviders from "../../WithProviders";
+import { PersonContext } from "../../Contexts";
 import EducationList from "./EducationList";
-import { escapeRegExp } from "../util/helpers";
+import { escapeRegExp } from "../../util/helpers";
 
 const samplePerson = {
   education: [

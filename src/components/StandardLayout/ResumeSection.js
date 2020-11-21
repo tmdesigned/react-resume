@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Accordion, AccordionSummary, Container } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
-import { DisplayOptionsContext } from "../Contexts";
+import { DisplayOptionsContext } from "../../Contexts";
 import { useCardStyles } from "./ResumeCard/CardStyles";
 
 const ResumeSection = ({ title, children }) => {

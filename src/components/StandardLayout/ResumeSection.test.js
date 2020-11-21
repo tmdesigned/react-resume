@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ResumeSection from "./ResumeSection";
-import WithProviders from "../WithProviders";
+import WithProviders from "../../WithProviders";
 
 const sample = {
   title: "My Resume Section"

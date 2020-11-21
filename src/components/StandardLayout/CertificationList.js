@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { PersonContext } from "../Contexts";
 import ResumeCard from "./ResumeCard/ResumeCard";
 import ResumeSection from "./ResumeSection";
-import { filterByKeys } from "../util/helpers";
+import { PersonContext } from "../../Contexts";
+import { filterByKeys } from "../../util/helpers";
 
 const CertificationList = () => {
   const person = useContext(PersonContext);

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import Overview from "./Overview";
-import ExperienceList from "./ExperienceList";
-import EducationList from "./EducationList";
-import CertificationList from "./CertificationList";
+import Timeline from "./TimelineLayout/Timeline";
+import Overview from "./StandardLayout/Overview";
+import ExperienceList from "./StandardLayout/ExperienceList";
+import EducationList from "./StandardLayout/EducationList";
+import CertificationList from "./StandardLayout/CertificationList";
 import DisplayOptions from "./DisplayOptions";
 import { PersonContext } from "../Contexts";
 import person from "../taylor.json";
@@ -16,7 +17,9 @@ const Resume = () => {
       <Container>
         <DisplayOptions />
         {displayOptions.timeline ? (
-          <div data-testid="timeline-layout">timeline</div>
+          <div data-testid="timeline-layout">
+            <Timeline />
+          </div>
         ) : (
           <div data-testid="standard-layout">
             <Overview />

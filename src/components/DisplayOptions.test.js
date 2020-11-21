@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../WithProviders";
 import DisplayOptions from "./DisplayOptions";
 import Resume from "./Resume";
-import ResumeCard from "../components/ResumeCard/ResumeCard";
+import ResumeCard from "./StandardLayout/ResumeCard/ResumeCard";
 
 describe("loads and displays output", () => {
   beforeEach(() => {

@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ResumeCard from "./ResumeCard";
-import WithProviders from "../../WithProviders";
+import WithProviders from "../../../WithProviders";
 
 const sample = {
   title: "My Title",
