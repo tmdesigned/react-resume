@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../WithProviders";
 import DisplayOptions from "./DisplayOptions";
+import Resume from "./Resume";
 import ResumeCard from "../components/ResumeCard/ResumeCard";
 
 describe("loads and displays output", () => {
@@ -130,6 +131,62 @@ describe("has a working 'show details' toggle", () => {
         expect(screen.getByText(bullet)).toBeInTheDocument();
         expect(screen.getByText(bullet)).not.toBeVisible();
       });
+    });
+  });
+
+  describe("has a working  timeline' toggle", () => {
+    test("renders a detaitimelinels toggle", () => {
+      render(
+        <WithProviders>
+          <DisplayOptions />
+        </WithProviders>
+      );
+      expect(screen.getByTestId("toggle-timeline")).toBeInTheDocument();
+    });
+
+    test("defaults to inactive", () => {
+      render(
+        <WithProviders>
+          <DisplayOptions />
+        </WithProviders>
+      );
+      const button = screen.getByTestId("toggle-timeline");
+      expect(button).toHaveAttribute("aria-pressed", "false");
+    });
+
+    test("switches to active when pressed", async () => {
+      render(
+        <WithProviders>
+          <DisplayOptions />
+        </WithProviders>
+      );
+      const button = screen.getByTestId("toggle-timeline");
+      expect(button).toHaveAttribute("aria-pressed", "false");
+      fireEvent.click(button);
+      await waitFor(() =>
+        expect(button).toHaveAttribute("aria-pressed", "true")
+      );
+    });
+
+    test("successfully toggles timeline", async () => {
+      render(
+        <WithProviders>
+          <Resume />
+        </WithProviders>
+      );
+
+      expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
+
+      const button = screen.getByTestId("toggle-timeline");
+      fireEvent.click(button);
+
+      await waitFor(() => {
+        expect(screen.getByTestId("timeline-layout")).toBeInTheDocument();
+      });
+
+      fireEvent.click(button);
+
+      expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
     });
   });
 });

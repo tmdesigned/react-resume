@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import {
   FormatListBulleted as FormatListBulletedIcon,
-  WbIncandescent as WbIncandescentIcon
+  WbIncandescent as WbIncandescentIcon,
+  AccessTime as AccessTimeIcon
 } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import cx from "classnames";
@@ -32,6 +33,19 @@ const DisplayOptions = () => {
 
   return (
     <ToggleButtonGroup className={classes.root} data-testid="display-options">
+      <ToggleButton
+        className={cx({
+          [classes["display-options__button"]]: true,
+          [classes["display-options__button--active"]]: displayOptions.timeline
+        })}
+        value="toggleTimeline"
+        data-testid="toggle-timeline"
+        selected={displayOptions.timeline}
+        onClick={() => dispatchDisplayOption({ type: "toggleTimeline" })}
+      >
+        <AccessTimeIcon className={classes["display-options__button-icon"]} />
+        Timeline
+      </ToggleButton>
       <ToggleButton
         className={cx({
           [classes["display-options__button"]]: true,
