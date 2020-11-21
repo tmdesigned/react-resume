@@ -1,0 +1,208 @@
+{
+  "firstName": "Taylor",
+  "lastName": "Morgan",
+  "email": "taylor.morgan@gmail.com",
+  "summary": "Lead Software Engineer",
+  "experience": [
+    {
+      "id": 7,
+      "title": "Lead Software Engineer",
+      "department": "Enterprise Solutions",
+      "company": "Losant IoT, Inc.",
+      "city": "Cincinnati",
+      "state": "OH",
+      "from": "2020-04-15T04:00:00.000Z",
+      "responsibilities": [
+        "Manages team of Enterprise Solutions engineers.",
+        "Meets weekly with engineers to resolve issues and plan employee growth.",
+        "Develops, refines, and implements team engineering practices and processes.",
+        "Elicits feedback and represents team in planning of Losant platform features.",
+        "Defines project requirements and writes technical components of statements of work.",
+        "Serves as full-stack engineering lead on enterprise projects."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Software Engineer",
+      "department": "Enterprise Solutions",
+      "company": "Losant IoT, Inc.",
+      "city": "Cincinnati",
+      "state": "OH",
+      "from": "2019-05-28T04:00:00.000Z",
+      "to": "2020-04-14T20:59:59.999Z",
+      "responsibilities": [
+        "Evaluates IoT needs of enterprise clients to enhance their data and products.",
+        "Designs unique IoT solutions to meet clients’ business needs.",
+        "Plans application architecture for secure, robust, reliable, and scalable software.",
+        "Develops web applications to bridge the gap between raw IoT data and end-users.",
+        "Creates React applications, using both Redux and functional component hooks.",
+        "Integrates and expands on Losant’s web application enablement platform."
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Web Designer / Developer II",
+      "department": "Professional Services",
+      "company": "London Computer Systems",
+      "city": "Cincinnati",
+      "state": "OH",
+      "from": "2017-11-07T04:00:00.000Z",
+      "to": "2019-05-25T20:59:59.999Z",
+      "responsibilities": [
+        "Writes custom web applications for clients using frameworks such as Angular.",
+        "Creates high-performance API integrations with proprietary SaaS platform.",
+        "Mentors team members through code reviews, project design, and training sessions.",
+        "Identifies workflow bottlenecks and creates tools and processes for addressing them.",
+        "Oversees shared code libraries and expands them with reusable and robust solutions.",
+        "Handles escalated issues and projects to ensure customer satisfaction."
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Web Designer / Developer I",
+      "department": "Professional Services",
+      "company": "London Computer Systems",
+      "city": "Cincinnati",
+      "state": "OH",
+      "from": "2016-07-15T04:00:00.000Z",
+      "to": "2017-11-07T20:59:59.999Z",
+      "responsibilities": [
+        "Builds top-class WordPress themes from scratch, using HTML, CSS, JavaScript, and PHP.",
+        "Creates custom plugins to modularize development tasks and add end-user capabilities.",
+        "Develops integrations with third party libraries, frameworks, and APIs.",
+        "Integrates websites with mySQL and other custom databases.",
+        "Creates custom designs, incorporating client branding with modern aesthetics.",
+        "Works directly with clients to refine requirements and develop website strategies.",
+        "Develops and iterates on company processes and tools to streamline development.",
+        "Provides training sessions with clients to teach basic content management."
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Project and Web Coordinator",
+      "department": "Vicar General",
+      "company": "Catholic Diocese of Lexington",
+      "city": "Lexington",
+      "state": "KY",
+      "from": "2012-06-01T04:00:00.000Z",
+      "to": "2016-07-11T20:59:59.999Z",
+      "responsibilities": [
+        "Developed multiple websites to have greater scope and responsive designs.",
+        "Extended content management systems with custom front and back-end code development.",
+        "Created custom API integrations for both websites and internal applications.",
+        "Trained approximately 50 employees website content management via live workshops.",
+        "Designed print collateral, including flyers, t-shirts, and posters.",
+        "Created original videos for recruitment, fundraising, and website features.",
+        "Appeared monthly on local radio station WMJR 94.9 FM/1380 AM",
+        "Created and delivered live presentations (approx. 1/month) to congregations and schools.",
+        "Wrote quarterly newspaper articles for Cross Roads (bi-weekly, 15K).",
+        "Planned annual events and conferences, including marketing and logistics.",
+        "Managed a summer youth program, including supervision of 4 seasonal employees."
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Project Coordinator",
+      "department": "School of Theology and Seminary",
+      "company": "Saint John's University",
+      "city": "Collegeville",
+      "state": "MN",
+      "from": "2011-04-15T04:00:00.000Z",
+      "to": "2012-05-20T20:59:59.999Z",
+      "responsibilities": [
+        "Created and maintained websites and social media, including a custom WordPress blog.",
+        "Coordinated events of the graduate school, including marketing and day-of coordination.",
+        "Designed posters, event flyers, and resources for university programs.",
+        "Redesigned graduate school's email newsletter using custom HTML5 and CSS3.",
+        "Delivered live presentations in person and via regular webinars to promote offerings.",
+        "Created marketing videos for events and programs, as well as fundraising videos.",
+        "Supervised graduate assistants and in developing goals for their work."
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Post Production Assistant",
+      "department": "JeffDTV",
+      "company": "JeffDTV",
+      "city": "Memphis",
+      "state": "TN",
+      "from": "2007-12-05T04:00:00.000Z",
+      "to": "2009-07-29T20:59:59.999Z",
+      "responsibilities": [
+        "Edited training and marketing videos for Fortune 100 and Fortune 1000 clients.",
+        "Designed logos and graphical video assets using Adobe Photoshop suite.",
+        "Assisted on video production shoots including lighting, sound, staging, and camera.",
+        "Wrote and edited scripts for videos, including internal corporate communications.",
+        "Designed and published internal communication documents."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": 3,
+      "degree": "M.A.",
+      "degreeDescription": "Master of Arts",
+      "department": "Theology",
+      "primaryArea": "Scripture",
+      "secondaryArea": "Systematics",
+      "institution": "Saint John's University",
+      "city": "Collegeville",
+      "state": "MN",
+      "earned": "2011-05-15T16:00:00.000Z",
+      "distinction": "Summa Cum Laude"
+    },
+    {
+      "id": 2,
+      "degree": "B.S.",
+      "degreeDescription": "Bachelor of Science",
+      "department": "Communications",
+      "primaryArea": "Digital Media",
+      "secondaryArea": "Computer Science",
+      "institution": "Ohio University",
+      "city": "Athens",
+      "state": "OH",
+      "earned": "2007-05-25T16:00:00.000Z",
+      "distinction": "Summa Cum Laude"
+    },
+    {
+      "id": 1,
+      "degree": "B.A.",
+      "degreeDescription": "Bachelor of Arts",
+      "department": "Modern Languages",
+      "primaryArea": "Spanish",
+      "institution": "Ohio University",
+      "city": "Athens",
+      "state": "OH",
+      "earned": "2007-05-25T16:00:00.000Z",
+      "distinction": "Summa Cum Laude"
+    }
+  ],
+  "certifications": [
+    {
+      "id": 2,
+      "title": "Professional Scrum Master",
+      "organization": "Scrum.org",
+      "earned": "2020-10-28T16:00:00.000Z",
+      "competencies": [
+        "Understanding and applying the Scrum Framework",
+        "Developing people and teams",
+        "Managing products with agility",
+        "Developing & delivering products [rofessionally",
+        "Evolving an agile organization"
+      ]
+    },
+    {
+      "id": 1,
+      "title": "AWS Cloud Practicioner",
+      "organization": "Amazon Web Services",
+      "earned": "2020-04-01T16:00:00.000Z",
+      "competencies": [
+        "Understanding the AWS shared responsibility model.",
+        "Applying AWS Cloud security best practices.",
+        "Following AWS Cloud costs, economics, and billing practices.",
+        "Knowing and placing the core AWS services, including compute, network, databases, and storage.",
+        "Recognizing AWS services for common use cases."
+      ]
+    }
+  ]
+}
