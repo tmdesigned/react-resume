@@ -3,11 +3,13 @@ import TimelineArray from "./TimelineArray";
 const sample = [
   {
     myTitle: "some title",
+    mySubtitle: "some subtitle",
     myStart: "2020-04-15T04:00:00.000Z",
     myEnd: "2019-05-28T04:00:00.000Z"
   },
   {
     myTitle: "some other title",
+    mySubtitle: "some other subtitle",
     myStart: "2016-04-14T20:59:59.999Z",
     myEnd: "2017-11-07T04:00:00.000Z"
   }
@@ -15,6 +17,7 @@ const sample = [
 
 const sampleFunctions = {
   title: (item) => item.myTitle,
+  subtitle: (item) => item.mySubitle,
   from: (item) => new Date(item.myStart),
   to: (item) => new Date(item.myEnd)
 };
@@ -39,6 +42,7 @@ describe("it should store items", () => {
     const tA = new TimelineArray();
     tA.addStandardizedItems(sample, sampleFunctions);
     expect(tA.items.length).toEqual(sample.length);
+    expect(tA.items[0].timelineTitle).toEqual(sample[0].myTitle);
   });
 
   test("accepts multiple arrays of new items", () => {

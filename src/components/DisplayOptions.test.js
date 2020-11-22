@@ -30,16 +30,18 @@ describe("has a working dark mode toggle", () => {
     expect(screen.getByTestId("toggle-dark")).toBeInTheDocument();
   });
 
-  test("defaults to inactive", () => {
+  test("defaults to active", () => {
     const button = screen.getByTestId("toggle-dark");
-    expect(button).toHaveAttribute("aria-pressed", "false");
+    expect(button).toHaveAttribute("aria-pressed", "true");
   });
 
-  test("switches to active when pressed", async () => {
+  test("switches to inactive when pressed", async () => {
     const button = screen.getByTestId("toggle-dark");
-    expect(button).toHaveAttribute("aria-pressed", "false");
+    expect(button).toHaveAttribute("aria-pressed", "true");
     fireEvent.click(button);
-    await waitFor(() => expect(button).toHaveAttribute("aria-pressed", "true"));
+    await waitFor(() =>
+      expect(button).toHaveAttribute("aria-pressed", "false")
+    );
   });
 
   test("successfully toggles between light and dark mode", async () => {
@@ -48,21 +50,21 @@ describe("has a working dark mode toggle", () => {
 
     const body = document.getElementsByTagName("body")[0];
     const preStyle = window.getComputedStyle(body);
-    expect(preStyle.backgroundColor).toBe(lightBackgroundColor);
+    expect(preStyle.backgroundColor).toBe(darkBackgroundColor);
 
     const button = screen.getByTestId("toggle-dark");
-    fireEvent.click(button); // enable dark
-
-    await waitFor(() => {
-      const style = window.getComputedStyle(body);
-      expect(style.backgroundColor).toBe(darkBackgroundColor);
-    });
-
     fireEvent.click(button); // disable dark
 
     await waitFor(() => {
       const style = window.getComputedStyle(body);
       expect(style.backgroundColor).toBe(lightBackgroundColor);
+    });
+
+    fireEvent.click(button); // enable dark
+
+    await waitFor(() => {
+      const style = window.getComputedStyle(body);
+      expect(style.backgroundColor).toBe(darkBackgroundColor);
     });
   });
 });

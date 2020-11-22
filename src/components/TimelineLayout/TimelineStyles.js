@@ -47,6 +47,9 @@ export const useTimelineStyles = makeStyles((theme) => {
       fill: props.dark ? "#fff" : "#000",
       opacity: "0",
       transition: ".3s"
+    }),
+    timelineYear: (props) => ({
+      fill: props.dark ? "#fff" : "#000"
     })
   };
 });

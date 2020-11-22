@@ -15,7 +15,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(3)
   },
   "display-options__button": {
     borderRadius: 0,

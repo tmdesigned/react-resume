@@ -12,6 +12,7 @@ const Timeline = () => {
   const person = useContext(PersonContext);
   const classes = useTimelineStyles(displayOptions);
   const [timelineHeight, setTimelineHeight] = useState(1000);
+  const [timelineYears, setTimelineYears] = useState([]);
   const [selectedRange, setSelectedRange] = useState(null);
 
   const timelineItems = useMemo(() => {
@@ -36,10 +37,26 @@ const Timeline = () => {
       });
   }, [person]);
 
+  const buildYearDatesArrayInRange = (startDate, endDate) => {
+    const startYear = startDate.getFullYear();
+    const endYear = endDate.getFullYear();
+    let years = [];
+    for (let i = startYear; i <= endYear; i++) {
+      years.push(new Date(`1/1/${i}`));
+    }
+    return years;
+  };
+
   useEffect(() => {
     setTimelineHeight(timelineItems.duration() / DURATION_HEIGHT_FACTOR);
     if (timelineItems.items.length) {
       setSelectedRange(timelineItems.items[0].key);
+      setTimelineYears(
+        buildYearDatesArrayInRange(
+          timelineItems.earliestDate,
+          timelineItems.latestDate
+        )
+      );
     }
   }, [timelineItems]);
 
@@ -93,6 +110,20 @@ const Timeline = () => {
                 height="22"
               />
             </g>
+          </g>
+          <g>
+            {timelineYears.map((year) => (
+              <text
+                key={year.valueOf()}
+                className={classes.timelineYear}
+                x={-40}
+                y={dateToYOffset(year)}
+                fontSize={18}
+                textAnchor="end"
+              >
+                {year.getFullYear()}
+              </text>
+            ))}
           </g>
           <g>
             {timelineItems.items.map((timelineItem, idx) => (
