@@ -93,7 +93,7 @@ class TimelineArray extends Array {
             timelineStart,
             timelineEnd
           ),
-          key: previousLength + idx - 1
+          key: `timelineKey-${previousLength + idx - 1}`
         }
       ];
     }, []);

@@ -1,7 +1,7 @@
 export const defaultDisplayOptionsState = {
   timeline: false,
   showDetails: false,
-  dark: false
+  dark: true
 };
 
 export const displayOptionsReducer = (state, action) => {

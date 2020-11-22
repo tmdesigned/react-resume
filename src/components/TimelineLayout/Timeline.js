@@ -12,6 +12,7 @@ const Timeline = () => {
   const person = useContext(PersonContext);
   const classes = useTimelineStyles(displayOptions);
   const [timelineHeight, setTimelineHeight] = useState(1000);
+  const [selectedRange, setSelectedRange] = useState(null);
 
   const timelineItems = useMemo(() => {
     return new TimelineArray()
@@ -37,15 +38,25 @@ const Timeline = () => {
 
   useEffect(() => {
     setTimelineHeight(timelineItems.duration() / DURATION_HEIGHT_FACTOR);
+    if (timelineItems.items.length) {
+      setSelectedRange(timelineItems.items[0].key);
+    }
   }, [timelineItems]);
 
   const dateToYOffset = (date) => {
+    if (!timelineItems.items.length) {
+      return 0;
+    }
     const percentOfDuration =
       (timelineItems.latestDate - date) / timelineItems.duration();
     return (
       TOP_BOTTOM_OFFSET +
       percentOfDuration * (timelineHeight - 2 * TOP_BOTTOM_OFFSET)
     );
+  };
+
+  const selectRange = (key) => {
+    setSelectedRange(key);
   };
 
   return (
@@ -89,6 +100,8 @@ const Timeline = () => {
                 timelineItem={timelineItem}
                 idx={idx}
                 dateToYOffset={dateToYOffset}
+                selectRange={selectRange}
+                selected={timelineItem.key === selectedRange}
               />
             ))}
           </g>

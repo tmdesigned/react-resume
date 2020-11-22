@@ -26,7 +26,12 @@ export const useTimelineStyles = makeStyles((theme) => {
     }),
     timelineRange: {
       "&:hover *": {
-        opacity: "1"
+        // opacity: "1"
+      }
+    },
+    selectedRange: {
+      "& *": {
+        opacity: "1 !important"
       }
     },
     timelineItem: {
