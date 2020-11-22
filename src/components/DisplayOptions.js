@@ -49,22 +49,6 @@ const DisplayOptions = () => {
       <ToggleButton
         className={cx({
           [classes["display-options__button"]]: true,
-          [classes["display-options__button--active"]]:
-            displayOptions.showDetails
-        })}
-        value="showDetails"
-        data-testid="toggle-details"
-        selected={displayOptions.showDetails}
-        onClick={() => dispatchDisplayOption({ type: "toggleShowDetails" })}
-      >
-        <FormatListBulletedIcon
-          className={classes["display-options__button-icon"]}
-        />
-        {displayOptions.showDetails ? "Collapse All" : "Expand All"}
-      </ToggleButton>
-      <ToggleButton
-        className={cx({
-          [classes["display-options__button"]]: true,
           [classes["display-options__button--active"]]: displayOptions.dark
         })}
         value="toggleDark"
@@ -77,6 +61,24 @@ const DisplayOptions = () => {
         />
         Dark
       </ToggleButton>
+      {!displayOptions.timeline && (
+        <ToggleButton
+          className={cx({
+            [classes["display-options__button"]]: true,
+            [classes["display-options__button--active"]]:
+              displayOptions.showDetails
+          })}
+          value="showDetails"
+          data-testid="toggle-details"
+          selected={displayOptions.showDetails}
+          onClick={() => dispatchDisplayOption({ type: "toggleShowDetails" })}
+        >
+          <FormatListBulletedIcon
+            className={classes["display-options__button-icon"]}
+          />
+          Expand All
+        </ToggleButton>
+      )}
     </ToggleButtonGroup>
   );
 };
