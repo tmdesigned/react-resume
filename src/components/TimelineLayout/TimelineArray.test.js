@@ -37,27 +37,15 @@ describe("it should store items", () => {
 
   test("accepts an array of new items", () => {
     const tA = new TimelineArray();
-    tA.addStandardizedItems(
-      sample,
-      sampleFunctions.title,
-      sampleFunctions.from,
-      sampleFunctions.to
-    );
+    tA.addStandardizedItems(sample, sampleFunctions);
     expect(tA.items.length).toEqual(sample.length);
   });
 
   test("accepts multiple arrays of new items", () => {
     const tA = new TimelineArray();
-    tA.addStandardizedItems(
+    tA.addStandardizedItems(sample, sampleFunctions).addStandardizedItems(
       sample,
-      sampleFunctions.title,
-      sampleFunctions.from,
-      sampleFunctions.to
-    ).addStandardizedItems(
-      sample,
-      sampleFunctions.title,
-      sampleFunctions.from,
-      sampleFunctions.to
+      sampleFunctions
     );
     expect(tA.items.length).toEqual(2 * sample.length);
   });
@@ -79,40 +67,35 @@ describe("it should store items", () => {
     try {
       tA.addStandardizedItems(
         {}, // must be array
-        sampleFunctions.title,
-        sampleFunctions.from,
-        sampleFunctions.to
+        sampleFunctions
       );
     } catch (e) {
       registerException();
     }
     try {
-      tA.addStandardizedItems(
-        sample,
-        "", // should be func
-        sampleFunctions.from,
-        sampleFunctions.to
-      );
+      tA.addStandardizedItems(sample, {
+        title: "", // should be func
+        from: sampleFunctions.from,
+        to: sampleFunctions.to
+      });
     } catch (e) {
       registerException();
     }
     try {
-      tA.addStandardizedItems(
-        sample,
-        sampleFunctions.title,
-        "", // should be func
-        sampleFunctions.to
-      );
+      tA.addStandardizedItems(sample, {
+        title: sampleFunctions.title,
+        from: "", // should be func
+        to: sampleFunctions.to
+      });
     } catch (e) {
       registerException();
     }
     try {
-      tA.addStandardizedItems(
-        sample,
-        sampleFunctions.title,
-        sampleFunctions.from,
-        "" // should be func
-      );
+      tA.addStandardizedItems(sample, {
+        title: sampleFunctions.title,
+        from: sampleFunctions.from,
+        to: "" // should be func
+      });
     } catch (e) {
       registerException();
     }
@@ -121,12 +104,11 @@ describe("it should store items", () => {
 
   test("ignore items if invalid date", () => {
     const tA = new TimelineArray();
-    tA.addStandardizedItems(
-      sample,
-      sampleFunctions.title,
-      (item) => item.title, // should be date
-      sampleFunctions.to
-    );
+    tA.addStandardizedItems(sample, {
+      title: sampleFunctions.title,
+      from: (item) => item.title, // should be date
+      to: sampleFunctions.to
+    });
 
     expect(tA.items.length).toEqual(0);
   });
@@ -134,9 +116,7 @@ describe("it should store items", () => {
   test("calculates the earliest received date", () => {
     const tA = new TimelineArray().addStandardizedItems(
       sample,
-      sampleFunctions.title,
-      sampleFunctions.from,
-      sampleFunctions.to
+      sampleFunctions
     );
     expect(tA.earliestDate.valueOf()).toEqual(
       new Date("2016-04-14T20:59:59.999Z").valueOf()
@@ -146,9 +126,7 @@ describe("it should store items", () => {
   test("calculates the latest received date", () => {
     const tA = new TimelineArray().addStandardizedItems(
       sample,
-      sampleFunctions.title,
-      sampleFunctions.from,
-      sampleFunctions.to
+      sampleFunctions
     );
     expect(tA.latestDate.valueOf()).toEqual(
       new Date("2020-04-15T04:00:00.000Z").valueOf()
@@ -158,9 +136,7 @@ describe("it should store items", () => {
   test("calculates the timeline duration", () => {
     const tA = new TimelineArray().addStandardizedItems(
       sample,
-      sampleFunctions.title,
-      sampleFunctions.from,
-      sampleFunctions.to
+      sampleFunctions
     );
     expect(tA.duration().valueOf()).toEqual(126255600001);
   });

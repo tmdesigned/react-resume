@@ -40,7 +40,34 @@ class TimelineArray extends Array {
     }
   }
 
-  addStandardizedItems = (incomingItems, titleFunc, fromFunc, toFunc) => {
+  _dateRangeOverlaps(a_start, a_end, b_start, b_end) {
+    if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
+    if (a_start <= b_end && b_end <= a_end) return true; // b ends in a
+    if (b_start < a_start && a_end < b_end) return true; // a in b
+    return false;
+  }
+
+  _numberOverlappingPrevious(newProcessedItems, from, to) {
+    let overlap = 0;
+    [...this.items, ...newProcessedItems].forEach((existingItem) => {
+      if (
+        this._dateRangeOverlaps(
+          from,
+          to,
+          existingItem.timelineStart,
+          existingItem.timelineEnd
+        )
+      ) {
+        overlap++;
+      }
+    });
+    return overlap;
+  }
+
+  addStandardizedItems = (
+    incomingItems,
+    { title: titleFunc, subtitle: subtitleFunc, from: fromFunc, to: toFunc }
+  ) => {
     if (!incomingItems) {
       return this;
     }
@@ -58,8 +85,14 @@ class TimelineArray extends Array {
         {
           ...item,
           timelineTitle: titleFunc(item),
+          timelineSubtitle: subtitleFunc(item),
           timelineStart,
           timelineEnd,
+          timelineOverlap: this._numberOverlappingPrevious(
+            acc,
+            timelineStart,
+            timelineEnd
+          ),
           key: previousLength + idx - 1
         }
       ];
