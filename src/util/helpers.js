@@ -11,3 +11,5 @@ export const filterByKeys = (obj, allowedKeys) => {
 
 export const escapeRegExp = (string) =>
   string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+export const isValidDate = (date) => date instanceof Date && !isNaN(date);
