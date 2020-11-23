@@ -20,14 +20,10 @@ const TimelineItems = () => {
     setInfoBoxRefs((prev) => [...prev, ref]);
   };
 
-  const checkCollisions = () => {
-    infoBoxRefs.forEach((boxRef) => {
-      const bbox = boxRef.current.getBBox();
-    });
-  };
-
   useEffect(() => {
-    checkCollisions();
+    infoBoxRefs.forEach((boxRef) => {
+      // const bbox = boxRef.current.getBBox();
+    });
   }, [infoBoxRefs]);
 
   const timelineItems = useMemo(() => {
@@ -75,7 +71,11 @@ const TimelineItems = () => {
         value: timelineItems.duration()
       });
     }
-  }, [timelineItems]);
+  }, [
+    dispatchTimelineConfigAction,
+    timelineItems,
+    timelineConfig.durationHeightFactor
+  ]);
 
   const selectRange = (key) => {
     setSelectedRange(key);
@@ -83,6 +83,7 @@ const TimelineItems = () => {
 
   return timelineItems.items.map((timelineItem, idx) => (
     <TimelineRange
+      key={timelineItem.key}
       timelineItem={timelineItem}
       idx={idx}
       dateToYOffset={timelineConfig.dateToYOffset}

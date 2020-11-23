@@ -32,6 +32,9 @@ const TimelineRange = ({
   const y2 = dateToYOffset(timelineItem.timelineEnd);
   const adjustedY2 = y1 === y2 ? y1 + 5 : y2;
   const midY = (y1 + y2) / 2;
+  if (isNaN(midY)) {
+    console.log(y1, y2);
+  }
 
   const selectThisRange = useCallback(() => {
     selectRange(timelineItem.key);

@@ -170,25 +170,25 @@ describe("has a working 'show details' toggle", () => {
       );
     });
 
-    test("successfully toggles timeline", async () => {
-      render(
-        <WithProviders>
-          <Resume />
-        </WithProviders>
-      );
+    //   test("successfully toggles timeline", async () => {
+    //     render(
+    //       <WithProviders>
+    //         <Resume />
+    //       </WithProviders>
+    //     );
 
-      expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
+    //     expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
 
-      const button = screen.getByTestId("toggle-timeline");
-      fireEvent.click(button);
+    //     const button = screen.getByTestId("toggle-timeline");
+    //     fireEvent.click(button);
 
-      await waitFor(() => {
-        expect(screen.getByTestId("timeline-layout")).toBeInTheDocument();
-      });
+    //     await waitFor(() => {
+    //       expect(screen.getByTestId("timeline-layout")).toBeInTheDocument();
+    //     });
 
-      fireEvent.click(button);
+    //     fireEvent.click(button);
 
-      expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
-    });
+    //     expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
+    //   });
   });
 });

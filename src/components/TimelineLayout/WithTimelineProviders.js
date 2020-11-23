@@ -17,14 +17,17 @@ const WithTimelineProviders = ({
     initialTimelineConfig
   );
 
-  timelineConfig.dateToYOffset = (date, note = "") => {
+  timelineConfig.dateToYOffset = (date) => {
+    if (timelineConfig.duration < 1) {
+      return 0;
+    }
     const percentOfDuration =
       (timelineConfig.end - date) / timelineConfig.duration;
-    const val =
+    return (
       timelineConfig.topAndBottomOffset +
       percentOfDuration *
-        (timelineConfig.height - 2 * timelineConfig.topAndBottomOffset);
-    return val;
+        (timelineConfig.height - 2 * timelineConfig.topAndBottomOffset)
+    );
   };
 
   return (
