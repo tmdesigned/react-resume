@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import cx from "classnames";
 import { DisplayOptionsContext } from "../../Contexts";
 import { useTimelineStyles } from "./TimelineStyles";
@@ -17,10 +17,12 @@ const TimelineRange = ({
   idx,
   dateToYOffset,
   selectRange,
-  selected
+  selected,
+  addInfoBoxRef
 }) => {
   const displayOptions = useContext(DisplayOptionsContext);
   const classes = useTimelineStyles(displayOptions);
+  const infoBoxRef = useRef(null);
 
   const color = materialColors[idx % materialColors.length];
   const offset = timelineItem.timelineOverlap
@@ -34,6 +36,10 @@ const TimelineRange = ({
   const selectThisRange = useCallback(() => {
     selectRange(timelineItem.key);
   }, [selectRange, timelineItem.key]);
+
+  useEffect(() => {
+    addInfoBoxRef(infoBoxRef);
+  }, [infoBoxRef]);
 
   return (
     <g
@@ -52,23 +58,25 @@ const TimelineRange = ({
         x2={45 * offset}
         y2={adjustedY2}
       />
-      <text
-        className={classes.timelineTitle}
-        x={70 + 45 * offset}
-        y={midY - 10}
-        fill={color}
-        fontSize={16}
-      >
-        {timelineItem.timelineTitle}
-      </text>
-      <text
-        className={classes.timelineSubtitle}
-        x={70 + 45 * offset}
-        y={midY + 10}
-        fontSize={12}
-      >
-        {timelineItem.timelineSubtitle}
-      </text>
+      <g ref={infoBoxRef}>
+        <text
+          className={classes.timelineTitle}
+          x={70 + 45 * offset}
+          y={midY - 10}
+          fill={color}
+          fontSize={16}
+        >
+          {timelineItem.timelineTitle}
+        </text>
+        <text
+          className={classes.timelineSubtitle}
+          x={70 + 45 * offset}
+          y={midY + 10}
+          fontSize={12}
+        >
+          {timelineItem.timelineSubtitle}
+        </text>
+      </g>
     </g>
   );
 };

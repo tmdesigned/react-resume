@@ -8,6 +8,7 @@ import ExperienceList from "./StandardLayout/ExperienceList";
 import EducationList from "./StandardLayout/EducationList";
 import CertificationList from "./StandardLayout/CertificationList";
 import DisplayOptions from "./DisplayOptions";
+import WithTimelineProviders from "./TimelineLayout/WithTimelineProviders";
 
 const Resume = () => {
   const displayOptions = useContext(DisplayOptionsContext);
@@ -17,7 +18,9 @@ const Resume = () => {
         <DisplayOptions />
         {displayOptions.timeline ? (
           <div data-testid="timeline-layout">
-            <Timeline />
+            <WithTimelineProviders>
+              <Timeline />
+            </WithTimelineProviders>
           </div>
         ) : (
           <div data-testid="standard-layout">

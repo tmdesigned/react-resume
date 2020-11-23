@@ -31,7 +31,7 @@ export const useTimelineStyles = makeStyles((theme) => {
     },
     selectedRange: {
       "& *": {
-        opacity: "1 !important"
+        // opacity: "1 !important"
       }
     },
     timelineItem: {
@@ -40,12 +40,12 @@ export const useTimelineStyles = makeStyles((theme) => {
       strokeMiterlimit: 10
     },
     timelineTitle: {
-      opacity: "0",
+      opacity: "1",
       transition: ".3s"
     },
     timelineSubtitle: (props) => ({
       fill: props.dark ? "#fff" : "#000",
-      opacity: "0",
+      opacity: "1",
       transition: ".3s"
     }),
     timelineYear: (props) => ({
