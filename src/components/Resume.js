@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
+import { Container } from "@material-ui/core";
+import { PersonContext, DisplayOptionsContext } from "../Contexts";
+import person from "../taylor.json";
 import Timeline from "./TimelineLayout/Timeline";
 import Overview from "./StandardLayout/Overview";
 import ExperienceList from "./StandardLayout/ExperienceList";
 import EducationList from "./StandardLayout/EducationList";
 import CertificationList from "./StandardLayout/CertificationList";
 import DisplayOptions from "./DisplayOptions";
-import { PersonContext } from "../Contexts";
-import person from "../taylor.json";
-import { Container } from "@material-ui/core";
-import { DisplayOptionsContext } from "../Contexts";
 
 const Resume = () => {
   const displayOptions = useContext(DisplayOptionsContext);

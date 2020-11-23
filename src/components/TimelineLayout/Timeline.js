@@ -4,10 +4,12 @@ import { PersonContext, DisplayOptionsContext } from "../../Contexts";
 import TimelineArray from "./TimelineArray";
 import TimelineRange from "./TimelineRange";
 
-const Timeline = () => {
-  const DURATION_HEIGHT_FACTOR = 200000000; // ms to pixels
-  const TOP_BOTTOM_OFFSET = 50;
+const svgOptions = Object.freeze({
+  durationHeightFactor: 200000000, // ms to pixels
+  topAndBottomOffset: 50
+});
 
+const Timeline = () => {
   const displayOptions = useContext(DisplayOptionsContext);
   const person = useContext(PersonContext);
   const classes = useTimelineStyles(displayOptions);
@@ -48,7 +50,9 @@ const Timeline = () => {
   };
 
   useEffect(() => {
-    setTimelineHeight(timelineItems.duration() / DURATION_HEIGHT_FACTOR);
+    setTimelineHeight(
+      timelineItems.duration() / svgOptions.durationHeightFactor
+    );
     if (timelineItems.items.length) {
       setSelectedRange(timelineItems.items[0].key);
       setTimelineYears(
@@ -67,8 +71,8 @@ const Timeline = () => {
     const percentOfDuration =
       (timelineItems.latestDate - date) / timelineItems.duration();
     return (
-      TOP_BOTTOM_OFFSET +
-      percentOfDuration * (timelineHeight - 2 * TOP_BOTTOM_OFFSET)
+      svgOptions.topAndBottomOffset +
+      percentOfDuration * (timelineHeight - 2 * svgOptions.topAndBottomOffset)
     );
   };
 
@@ -89,23 +93,25 @@ const Timeline = () => {
             <line
               className={classes.timeline}
               x1="0"
-              y1={TOP_BOTTOM_OFFSET}
+              y1={svgOptions.topAndBottomOffset}
               x2="0"
-              y2={timelineHeight - TOP_BOTTOM_OFFSET}
+              y2={timelineHeight - svgOptions.topAndBottomOffset}
             />
             <g>
               <polygon
                 className={classes.timelineCaps}
-                points={`0,${TOP_BOTTOM_OFFSET - 10} -10,${
-                  TOP_BOTTOM_OFFSET + 10
-                } 0,${TOP_BOTTOM_OFFSET + 30} 10,${TOP_BOTTOM_OFFSET + 10} 			`}
+                points={`0,${svgOptions.topAndBottomOffset - 10} -10,${
+                  svgOptions.topAndBottomOffset + 10
+                } 0,${svgOptions.topAndBottomOffset + 30} 10,${
+                  svgOptions.topAndBottomOffset + 10
+                } 			`}
               />
             </g>
             <g>
               <rect
                 className={classes.timelineCaps}
                 x="-11"
-                y={timelineHeight - TOP_BOTTOM_OFFSET}
+                y={timelineHeight - svgOptions.topAndBottomOffset}
                 width="22"
                 height="22"
               />
