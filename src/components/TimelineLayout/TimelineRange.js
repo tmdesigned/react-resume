@@ -18,7 +18,8 @@ const TimelineRange = ({
   dateToYOffset,
   selectRange,
   selected,
-  addInfoBoxRef
+  addInfoBoxRef,
+  overlapAdjustment
 }) => {
   const displayOptions = useContext(DisplayOptionsContext);
   const classes = useTimelineStyles(displayOptions);
@@ -28,13 +29,12 @@ const TimelineRange = ({
   const offset = timelineItem.timelineOverlap
     ? timelineItem.timelineOverlap + 1
     : 1;
+  const overlapXAdjustment = overlapAdjustment ? overlapAdjustment.x : 0;
+  const overlapYAdjustment = overlapAdjustment ? overlapAdjustment.y : 0;
   const y1 = dateToYOffset(timelineItem.timelineStart);
   const y2 = dateToYOffset(timelineItem.timelineEnd);
   const adjustedY2 = y1 === y2 ? y1 + 5 : y2;
   const midY = (y1 + y2) / 2;
-  if (isNaN(midY)) {
-    console.log(y1, y2);
-  }
 
   const selectThisRange = useCallback(() => {
     selectRange(timelineItem.key);
@@ -42,7 +42,7 @@ const TimelineRange = ({
 
   useEffect(() => {
     addInfoBoxRef(infoBoxRef);
-  }, [infoBoxRef]);
+  }, [addInfoBoxRef, infoBoxRef]);
 
   return (
     <g
@@ -61,11 +61,19 @@ const TimelineRange = ({
         x2={45 * offset}
         y2={adjustedY2}
       />
-      <g ref={infoBoxRef}>
+      <line
+        className={classes.connectingLine}
+        stroke={color}
+        x1={45 * offset + 25}
+        y1={midY}
+        x2={60 + 45 * offset + overlapXAdjustment}
+        y2={midY - 15 + overlapYAdjustment}
+      />
+      <g ref={infoBoxRef} parentkey={timelineItem.key}>
         <text
           className={classes.timelineTitle}
-          x={70 + 45 * offset}
-          y={midY - 10}
+          x={70 + 45 * offset + overlapXAdjustment}
+          y={midY - 10 + overlapYAdjustment}
           fill={color}
           fontSize={16}
         >
@@ -73,8 +81,8 @@ const TimelineRange = ({
         </text>
         <text
           className={classes.timelineSubtitle}
-          x={70 + 45 * offset}
-          y={midY + 10}
+          x={70 + 45 * offset + overlapXAdjustment}
+          y={midY + 10 + overlapYAdjustment}
           fontSize={12}
         >
           {timelineItem.timelineSubtitle}

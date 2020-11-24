@@ -3,7 +3,6 @@ import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../WithProviders";
 import DisplayOptions from "./DisplayOptions";
-import Resume from "./Resume";
 import ResumeCard from "./StandardLayout/ResumeCard/ResumeCard";
 
 describe("loads and displays output", () => {
@@ -169,26 +168,5 @@ describe("has a working 'show details' toggle", () => {
         expect(button).toHaveAttribute("aria-pressed", "true")
       );
     });
-
-    //   test("successfully toggles timeline", async () => {
-    //     render(
-    //       <WithProviders>
-    //         <Resume />
-    //       </WithProviders>
-    //     );
-
-    //     expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
-
-    //     const button = screen.getByTestId("toggle-timeline");
-    //     fireEvent.click(button);
-
-    //     await waitFor(() => {
-    //       expect(screen.getByTestId("timeline-layout")).toBeInTheDocument();
-    //     });
-
-    //     fireEvent.click(button);
-
-    //     expect(screen.getByTestId("standard-layout")).toBeInTheDocument();
-    //   });
   });
 });
