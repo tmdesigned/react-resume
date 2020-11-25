@@ -16,7 +16,7 @@ const Timeline = () => {
     >
       <svg
         className={classes.svg}
-        viewBox={`-100 0 500 ${timelineConfig.height} `}
+        viewBox={`${timelineConfig.x} ${timelineConfig.y} ${timelineConfig.width} ${timelineConfig.height}`}
         preserveAspectRatio="xMidYMin meet"
         xmlns="http://www.w3.org/2000/svg"
       >

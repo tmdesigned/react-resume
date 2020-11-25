@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import TimelineArray from "./TimelineArray";
 import TimelineRange from "./TimelineRange";
+import { isOverlapping } from "../../util/helpers";
 import {
   PersonContext,
   TimelineConfigContext,
@@ -19,7 +20,8 @@ const overlapAdjustmentReducer = (state, action) => {
     ...state,
     [action.key]: {
       x: action.x,
-      y: action.y
+      y: action.y,
+      iteration: action.iteration
     }
   };
 };
@@ -32,61 +34,80 @@ const TimelineItems = () => {
   );
   const [selectedRange, setSelectedRange] = useState(null);
   const [infoBoxRefs, setInfoBoxRefs] = useState([]);
+  const [adjustingRef, setAdjustingRef] = useState(null);
   const [overlapAdjustments, dispatchOverlapAdjustment] = useReducer(
     overlapAdjustmentReducer,
     {}
   );
 
-  const addInfoBoxRef = (ref) => {
-    setInfoBoxRefs((prev) => [...prev, ref]);
-  };
-
-  const overlaps = (r1, r2) => {
-    return !(
-      r2.x > r1.x + r1.width ||
-      r2.x + r2.width < r1.x ||
-      r2.y > r1.y + r1.height ||
-      r2.y + r2.height < r1.y
-    );
-  };
+  const addInfoBoxRef = useCallback(
+    (ref) => {
+      setInfoBoxRefs((prev) => [...prev, ref]);
+    },
+    [setInfoBoxRefs]
+  );
 
   const getParentKey = (ref) =>
     ref && ref.current ? ref.current.getAttribute("parentkey") : undefined;
 
-  const findOverlappingKey = useCallback((ref, otherRefs) => {
-    const bBox = ref.current.getBBox();
-    const overlapsWith = otherRefs.find(
-      (otherRef) =>
-        ref.current !== otherRef.current &&
-        overlaps(bBox, otherRef.current.getBBox())
-    );
-    return getParentKey(overlapsWith);
-  }, []);
+  const findOverlappingKey = useCallback(
+    (ref, otherRefs) => {
+      const bBox = ref.current.getBBox();
+      const overlapsWith = otherRefs.find(
+        (otherRef) =>
+          otherRef.current &&
+          ref.current !== otherRef.current &&
+          isOverlapping(
+            bBox,
+            otherRef.current.getBBox(),
+            timelineConfig.overlapPadding
+          )
+      );
+      return getParentKey(overlapsWith);
+    },
+    [timelineConfig.overlapPadding]
+  );
 
-  useEffect(() => {
-    let newAdjustments = [];
-    infoBoxRefs.forEach((boxRef) => {
-      if (!boxRef.current) {
-        return;
-      }
-      const key = getParentKey(boxRef);
-      if (newAdjustments.indexOf(key) !== -1) {
-        return; // skip for this iteration, known and addressed overlap
-      }
-      const overlapsWithKey = findOverlappingKey(boxRef, infoBoxRefs);
+  const adjustRefPosition = useCallback(
+    (ref) => {
+      const key = getParentKey(ref);
       const prevX = overlapAdjustments[key] ? overlapAdjustments[key].x : 0;
       const prevY = overlapAdjustments[key] ? overlapAdjustments[key].y : 0;
-      if (overlapsWithKey) {
-        dispatchOverlapAdjustment({
-          key,
-          x: prevX,
-          y: prevY + 15
-        });
-        newAdjustments.push(key);
-        newAdjustments.push(overlapsWithKey);
+      const prevIteration = overlapAdjustments[key]
+        ? overlapAdjustments[key].iteration
+        : 0;
+
+      dispatchOverlapAdjustment({
+        key,
+        x: prevX,
+        y: prevY + 5,
+        iteration: prevIteration + 1
+      });
+    },
+    [overlapAdjustments]
+  );
+
+  useEffect(() => {
+    if (adjustingRef) {
+      const hasOverlap = findOverlappingKey(adjustingRef, infoBoxRefs);
+      if (hasOverlap) {
+        adjustRefPosition(adjustingRef);
+      } else {
+        setAdjustingRef(null);
       }
-    });
-  }, [findOverlappingKey, overlapAdjustments, infoBoxRefs]);
+    } else {
+      const refWithOverlap = infoBoxRefs.reverse().find((boxRef) => {
+        if (!boxRef.current) {
+          return false;
+        }
+
+        return findOverlappingKey(boxRef, infoBoxRefs);
+      });
+      if (refWithOverlap) {
+        setAdjustingRef(refWithOverlap);
+      }
+    }
+  }, [adjustingRef, adjustRefPosition, findOverlappingKey, infoBoxRefs]);
 
   const timelineItems = useMemo(() => {
     return new TimelineArray()

@@ -66,13 +66,13 @@ const TimelineRange = ({
         stroke={color}
         x1={45 * offset + 25}
         y1={midY}
-        x2={60 + 45 * offset + overlapXAdjustment}
+        x2={70 + 45 * offset + overlapXAdjustment}
         y2={midY - 15 + overlapYAdjustment}
       />
       <g ref={infoBoxRef} parentkey={timelineItem.key}>
         <text
           className={classes.timelineTitle}
-          x={70 + 45 * offset + overlapXAdjustment}
+          x={80 + 45 * offset + overlapXAdjustment}
           y={midY - 10 + overlapYAdjustment}
           fill={color}
           fontSize={16}
@@ -81,7 +81,7 @@ const TimelineRange = ({
         </text>
         <text
           className={classes.timelineSubtitle}
-          x={70 + 45 * offset + overlapXAdjustment}
+          x={80 + 45 * offset + overlapXAdjustment}
           y={midY + 10 + overlapYAdjustment}
           fontSize={12}
         >
