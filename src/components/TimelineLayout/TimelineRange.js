@@ -35,6 +35,7 @@ const TimelineRange = ({
   const y2 = dateToYOffset(timelineItem.timelineEnd);
   const adjustedY2 = y1 === y2 ? y1 + 5 : y2;
   const midY = (y1 + y2) / 2;
+  const initialTextY = midY - 30;
 
   const selectThisRange = useCallback(() => {
     selectRange(timelineItem.key);
@@ -67,13 +68,13 @@ const TimelineRange = ({
         x1={45 * offset + 25}
         y1={midY}
         x2={70 + 45 * offset + overlapXAdjustment}
-        y2={midY - 15 + overlapYAdjustment}
+        y2={initialTextY - 15 + overlapYAdjustment}
       />
       <g ref={infoBoxRef} parentkey={timelineItem.key}>
         <text
           className={classes.timelineTitle}
           x={80 + 45 * offset + overlapXAdjustment}
-          y={midY - 10 + overlapYAdjustment}
+          y={initialTextY - 10 + overlapYAdjustment}
           fill={color}
           fontSize={16}
         >
@@ -82,7 +83,7 @@ const TimelineRange = ({
         <text
           className={classes.timelineSubtitle}
           x={80 + 45 * offset + overlapXAdjustment}
-          y={midY + 10 + overlapYAdjustment}
+          y={initialTextY + 10 + overlapYAdjustment}
           fontSize={12}
         >
           {timelineItem.timelineSubtitle}
