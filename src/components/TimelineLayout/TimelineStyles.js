@@ -41,7 +41,8 @@ export const useTimelineStyles = makeStyles((theme) => {
       strokeMiterlimit: 10
     }),
     connectingLine: (timelineOptions) => ({
-      stroke: theme.palette[timelineOptions.type]
+      stroke: theme.palette[timelineOptions.type],
+      opacity: 0.4
     }),
     timelineTitle: (timelineOptions) => ({
       opacity: "1",

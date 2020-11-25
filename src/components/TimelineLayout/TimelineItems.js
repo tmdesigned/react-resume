@@ -50,9 +50,9 @@ const TimelineItems = () => {
   const getParentKey = (ref) =>
     ref && ref.current ? ref.current.getAttribute("parentkey") : undefined;
 
-  const findOverlappingKey = useCallback(
-    (ref, otherRefs) => {
-      const bBox = ref.current.getBBox();
+  const findOverlappingRef = useCallback(
+    (ref, otherRefs, simulatedBox = null) => {
+      const bBox = simulatedBox || ref.current.getBBox();
       const overlapsWith = otherRefs.find(
         (otherRef) =>
           otherRef.current &&
@@ -63,35 +63,49 @@ const TimelineItems = () => {
             timelineConfig.overlapPadding
           )
       );
-      return getParentKey(overlapsWith);
+      return overlapsWith;
     },
     [timelineConfig.overlapPadding]
   );
 
   const adjustRefPosition = useCallback(
-    (ref) => {
+    (ref, overlapRef) => {
       const key = getParentKey(ref);
       const prevX = overlapAdjustments[key] ? overlapAdjustments[key].x : 0;
       const prevY = overlapAdjustments[key] ? overlapAdjustments[key].y : 0;
       const prevIteration = overlapAdjustments[key]
         ? overlapAdjustments[key].iteration
         : 0;
+      const box = ref.current.getBBox();
+      const adjustedBox = {
+        x: box.x,
+        y: box.y,
+        width: box.width,
+        height: box.height
+      };
+
+      let i = 0;
+      const pixelsEachStep = 5;
+      while (findOverlappingRef(ref, infoBoxRefs, adjustedBox) && i < 50) {
+        adjustedBox.y = adjustedBox.y + pixelsEachStep;
+        i++;
+      }
 
       dispatchOverlapAdjustment({
         key,
         x: prevX,
-        y: prevY + 5,
+        y: prevY + i * pixelsEachStep,
         iteration: prevIteration + 1
       });
     },
-    [overlapAdjustments]
+    [infoBoxRefs, findOverlappingRef, overlapAdjustments]
   );
 
   useEffect(() => {
     if (adjustingRef) {
-      const hasOverlap = findOverlappingKey(adjustingRef, infoBoxRefs);
-      if (hasOverlap) {
-        adjustRefPosition(adjustingRef);
+      const overlappingRef = findOverlappingRef(adjustingRef, infoBoxRefs);
+      if (overlappingRef) {
+        adjustRefPosition(adjustingRef, overlappingRef);
       } else {
         setAdjustingRef(null);
       }
@@ -101,13 +115,13 @@ const TimelineItems = () => {
           return false;
         }
 
-        return findOverlappingKey(boxRef, infoBoxRefs);
+        return findOverlappingRef(boxRef, infoBoxRefs);
       });
       if (refWithOverlap) {
         setAdjustingRef(refWithOverlap);
       }
     }
-  }, [adjustingRef, adjustRefPosition, findOverlappingKey, infoBoxRefs]);
+  }, [adjustingRef, adjustRefPosition, findOverlappingRef, infoBoxRefs]);
 
   const timelineItems = useMemo(() => {
     return new TimelineArray()
