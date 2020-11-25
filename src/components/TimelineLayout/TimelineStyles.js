@@ -15,14 +15,14 @@ export const useTimelineStyles = makeStyles((theme) => {
       width: "100%",
       height: "100%"
     },
-    timeline: (props) => ({
+    timeline: (timelineOptions) => ({
       fill: "none",
-      stroke: props.dark ? "#fff" : "#000",
+      stroke: timelineOptions.dark ? "#fff" : "#000",
       strokeWidth: 4,
       strokeMiterlimit: 10
     }),
-    timelineCaps: (props) => ({
-      fill: props.dark ? "#fff" : "#000"
+    timelineCaps: (timelineOptions) => ({
+      fill: timelineOptions.dark ? "#fff" : "#000"
     }),
     timelineRange: {
       "&:hover *": {
@@ -34,22 +34,27 @@ export const useTimelineStyles = makeStyles((theme) => {
         // opacity: "1 !important"
       }
     },
-    timelineItem: {
+    timelineItem: (timelineOptions) => ({
       fill: "none",
+      stroke: theme.palette[timelineOptions.type],
       strokeWidth: 30,
       strokeMiterlimit: 10
-    },
-    timelineTitle: {
+    }),
+    connectingLine: (timelineOptions) => ({
+      stroke: theme.palette[timelineOptions.type]
+    }),
+    timelineTitle: (timelineOptions) => ({
       opacity: "1",
+      fill: theme.palette[timelineOptions.type],
       transition: ".3s"
-    },
-    timelineSubtitle: (props) => ({
-      fill: props.dark ? "#fff" : "#000",
+    }),
+    timelineSubtitle: (timelineOptions) => ({
+      fill: timelineOptions.dark ? "#fff" : "#000",
       opacity: "1",
       transition: ".3s"
     }),
-    timelineYear: (props) => ({
-      fill: props.dark ? "#fff" : "#000"
+    timelineYear: (timelineOptions) => ({
+      fill: timelineOptions.dark ? "#fff" : "#000"
     })
   };
 });

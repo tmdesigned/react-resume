@@ -65,7 +65,6 @@ class TimelineArray extends Array {
   }
 
   _sortedAdd = (item) => {
-    console.log("adding item", item, "to", this._items);
     this._items.splice(this._findLoc(item, this._items), 0, item);
   };
 
@@ -80,7 +79,13 @@ class TimelineArray extends Array {
 
   addStandardizedItems = (
     incomingItems,
-    { title: titleFunc, subtitle: subtitleFunc, from: fromFunc, to: toFunc }
+    {
+      type: typeFunc,
+      title: titleFunc,
+      subtitle: subtitleFunc,
+      from: fromFunc,
+      to: toFunc
+    }
   ) => {
     if (!incomingItems) {
       return this;
@@ -98,6 +103,7 @@ class TimelineArray extends Array {
         ...acc,
         {
           ...item,
+          timelineType: typeFunc(item),
           timelineTitle: titleFunc(item),
           timelineSubtitle: subtitleFunc(item),
           timelineStart,

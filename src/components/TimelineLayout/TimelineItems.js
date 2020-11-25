@@ -112,18 +112,21 @@ const TimelineItems = () => {
   const timelineItems = useMemo(() => {
     return new TimelineArray()
       .addStandardizedItems(person.experience, {
+        type: (item) => "experience",
         title: (item) => item.title,
         subtitle: (item) => `${item.company}, ${item.city}, ${item.state}`,
         from: (item) => new Date(item.from),
         to: (item) => (item.to ? new Date(item.to) : new Date())
       })
       .addStandardizedItems(person.education, {
+        type: (item) => "education",
         title: (item) => `${item.degree} in ${item.department}`,
         subtitle: (item) => item.institution,
         from: (item) => new Date(item.started),
         to: (item) => new Date(item.earned)
       })
       .addStandardizedItems(person.certifications, {
+        type: (item) => "certification",
         title: (item) => item.title,
         subtitle: (item) => item.organization,
         from: (item) => new Date(item.earned),
@@ -173,6 +176,7 @@ const TimelineItems = () => {
       selectRange={selectRange}
       selected={timelineItem.key === selectedRange}
       addInfoBoxRef={addInfoBoxRef}
+      type={timelineItem.timelineType}
       overlapAdjustment={overlapAdjustments[timelineItem.key]}
     />
   ));

@@ -3,15 +3,6 @@ import cx from "classnames";
 import { DisplayOptionsContext } from "../../Contexts";
 import { useTimelineStyles } from "./TimelineStyles";
 
-const materialColors = [
-  "#F44336",
-  "#2196F3",
-  "#4CAF50",
-  "#FFC107",
-  "#FF9800",
-  "#9C27B0"
-];
-
 const TimelineRange = ({
   timelineItem,
   idx,
@@ -19,13 +10,13 @@ const TimelineRange = ({
   selectRange,
   selected,
   addInfoBoxRef,
-  overlapAdjustment
+  overlapAdjustment,
+  type
 }) => {
   const displayOptions = useContext(DisplayOptionsContext);
-  const classes = useTimelineStyles(displayOptions);
+  const classes = useTimelineStyles({ ...displayOptions, type });
   const infoBoxRef = useRef(null);
 
-  const color = materialColors[idx % materialColors.length];
   const offset = timelineItem.timelineOverlap
     ? timelineItem.timelineOverlap + 1
     : 1;
@@ -56,7 +47,6 @@ const TimelineRange = ({
     >
       <line // timeline item span
         className={classes.timelineItem}
-        stroke={color}
         x1={45 * offset}
         y1={y1}
         x2={45 * offset}
@@ -64,7 +54,6 @@ const TimelineRange = ({
       />
       <line
         className={classes.connectingLine}
-        stroke={color}
         x1={45 * offset + 25}
         y1={midY}
         x2={70 + 45 * offset + overlapXAdjustment}
@@ -75,7 +64,6 @@ const TimelineRange = ({
           className={classes.timelineTitle}
           x={80 + 45 * offset + overlapXAdjustment}
           y={initialTextY - 10 + overlapYAdjustment}
-          fill={color}
           fontSize={16}
         >
           {timelineItem.timelineTitle}
