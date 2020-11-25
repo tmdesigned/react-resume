@@ -8,7 +8,7 @@ const CertificationList = () => {
   const person = useContext(PersonContext);
 
   return (
-    <ResumeSection title="Certifications">
+    <ResumeSection title="Certifications" styleType="certification">
       {person.certifications &&
         person.certifications.map((item) => (
           <ResumeCard

@@ -4,10 +4,10 @@ import { ExpandMore } from "@material-ui/icons";
 import { DisplayOptionsContext } from "../../Contexts";
 import { useCardStyles } from "./ResumeCard/CardStyles";
 
-const ResumeSection = ({ title, children }) => {
+const ResumeSection = ({ title, children, styleType }) => {
   const [expanded, setExpanded] = useState(true);
   const displayOptions = useContext(DisplayOptionsContext);
-  const classes = useCardStyles();
+  const classes = useCardStyles({ styleType });
 
   const toggleExpand = () => {
     setExpanded(!expanded);
@@ -18,7 +18,7 @@ const ResumeSection = ({ title, children }) => {
   }, [displayOptions.showDetails]);
 
   return (
-    <Accordion expanded={expanded} className="resume-section">
+    <Accordion expanded={expanded} className={classes.resumeSection}>
       <AccordionSummary expandIcon={<ExpandMore />} onClick={toggleExpand}>
         <h2 className={classes.header}>{title}</h2>
       </AccordionSummary>

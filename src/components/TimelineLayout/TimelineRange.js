@@ -5,7 +5,6 @@ import { useTimelineStyles } from "./TimelineStyles";
 
 const TimelineRange = ({
   timelineItem,
-  idx,
   dateToYOffset,
   selectRange,
   selected,

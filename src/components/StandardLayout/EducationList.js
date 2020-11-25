@@ -31,7 +31,7 @@ const EducationList = () => {
   };
 
   return (
-    <ResumeSection title="Education">
+    <ResumeSection title="Education" styleType="education">
       {person.education &&
         person.education.map((item) => (
           <ResumeCard
@@ -45,6 +45,7 @@ const EducationList = () => {
             from={item.earned}
             to={item.earned}
             bullets={bullets(item)}
+            styleType="education"
             key={item.id}
           />
         ))}

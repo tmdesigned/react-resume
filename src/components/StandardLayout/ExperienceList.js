@@ -8,7 +8,7 @@ const ExperienceList = () => {
   const person = useContext(PersonContext);
 
   return (
-    <ResumeSection title="Experience">
+    <ResumeSection title="Experience" styleType="experience">
       {person.experience &&
         person.experience.map((item) => (
           <ResumeCard
@@ -22,6 +22,7 @@ const ExperienceList = () => {
             from={item.from}
             to={item.to}
             bullets={item.responsibilities}
+            styleType="experience"
             key={item.id}
           />
         ))}

@@ -183,19 +183,6 @@
   "certifications": [
     {
       "id": 2,
-      "title": "Professional Scrum Master",
-      "organization": "Scrum.org",
-      "earned": "2019-10-28T16:00:00.000Z",
-      "competencies": [
-        "Understanding and applying the Scrum Framework",
-        "Developing people and teams",
-        "Managing products with agility",
-        "Developing & delivering products professionally",
-        "Evolving an agile organization"
-      ]
-    },
-    {
-      "id": 1,
       "title": "AWS Cloud Practicioner",
       "organization": "Amazon Web Services",
       "earned": "2020-04-01T16:00:00.000Z",
@@ -205,6 +192,19 @@
         "Following AWS Cloud costs, economics, and billing practices.",
         "Knowing and placing the core AWS services, including compute, network, databases, and storage.",
         "Recognizing AWS services for common use cases."
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Professional Scrum Master",
+      "organization": "Scrum.org",
+      "earned": "2019-10-28T16:00:00.000Z",
+      "competencies": [
+        "Understanding and applying the Scrum Framework",
+        "Developing people and teams",
+        "Managing products with agility",
+        "Developing & delivering products professionally",
+        "Evolving an agile organization"
       ]
     }
   ]
