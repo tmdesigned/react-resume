@@ -21,38 +21,3 @@ export const isOverlapping = (r1, r2, overlapPadding) =>
     r2.y - overlapPadding > r1.y + r1.height + overlapPadding ||
     r2.y + r2.height + overlapPadding < r1.y - overlapPadding
   );
-
-// export const amountYOverlapping = (r1,r2,overlapPadding) => {
-//   if(r2.y> r1.y && r2.y - overlapPadding < r1.y + r1.height + overlapPadding){
-//     return Math.abs(r1.y + r1.height + overlapPadding - r2.y );
-//   }else if (r2.y + r2.height + overlapPadding > r1.y - overlapPadding && r2.y + r2.height < r1.y + r1.height){
-//     return Math.abs(r1.y + r1.height - )
-//   }
-
-export const outOfBounds = (bBox, { minX, minY, width, height }) => {
-  const val =
-    bBox.x < minX ||
-    bBox.x + bBox.width > minX + width ||
-    bBox.y < minY ||
-    bBox.y + bBox.height > minY + height;
-
-  console.log("outofbounds?", bBox, val, minX, minY, width, height);
-  return val;
-};
-
-export const wiggle = (x, y, iteration) => {
-  return {
-    x:
-      iteration % 2 === 0
-        ? x
-        : iteration % 4 === 0
-        ? x + 5 * iteration
-        : x - 5 * iteration,
-    y:
-      iteration % 2 !== 0
-        ? y
-        : iteration % 4 !== 0
-        ? y + 5 * iteration
-        : y - 5 * iteration
-  };
-};
