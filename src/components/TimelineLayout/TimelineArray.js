@@ -64,6 +64,20 @@ class TimelineArray extends Array {
     return overlap;
   }
 
+  _sortedAdd = (item) => {
+    console.log("adding item", item, "to", this._items);
+    this._items.splice(this._findLoc(item, this._items), 0, item);
+  };
+
+  _findLoc(el, arr) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].timelineEnd > el.timelineEnd) {
+        return i - 1;
+      }
+    }
+    return arr.length;
+  }
+
   addStandardizedItems = (
     incomingItems,
     { title: titleFunc, subtitle: subtitleFunc, from: fromFunc, to: toFunc }
@@ -97,7 +111,7 @@ class TimelineArray extends Array {
         }
       ];
     }, []);
-    this.items = this._items.concat(newItems);
+    newItems.forEach((newItem) => this._sortedAdd(newItem));
     return this;
   };
 }

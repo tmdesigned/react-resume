@@ -96,7 +96,7 @@ const TimelineItems = () => {
         setAdjustingRef(null);
       }
     } else {
-      const refWithOverlap = infoBoxRefs.reverse().find((boxRef) => {
+      const refWithOverlap = infoBoxRefs.find((boxRef) => {
         if (!boxRef.current) {
           return false;
         }

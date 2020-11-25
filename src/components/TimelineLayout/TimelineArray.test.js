@@ -12,8 +12,18 @@ const sample = [
     mySubtitle: "some other subtitle",
     myStart: "2016-04-14T20:59:59.999Z",
     myEnd: "2017-11-07T04:00:00.000Z"
+  },
+  {
+    myTitle: "some third title",
+    mySubtitle: "some third subtitle",
+    myStart: "2019-04-14T20:59:59.999Z",
+    myEnd: "2020-11-07T04:00:00.000Z"
   }
 ];
+
+const sortByEndDate = (a, b) => {
+  return new Date(a.myEnd) - new Date(b.myEnd);
+};
 
 const sampleFunctions = {
   title: (item) => item.myTitle,
@@ -41,8 +51,9 @@ describe("it should store items", () => {
   test("accepts an array of new items", () => {
     const tA = new TimelineArray();
     tA.addStandardizedItems(sample, sampleFunctions);
+    const sortedSample = sample.sort(sortByEndDate);
     expect(tA.items.length).toEqual(sample.length);
-    expect(tA.items[0].timelineTitle).toEqual(sample[0].myTitle);
+    expect(tA.items[0].timelineTitle).toEqual(sortedSample[0].myTitle);
   });
 
   test("accepts multiple arrays of new items", () => {
@@ -52,6 +63,17 @@ describe("it should store items", () => {
       sampleFunctions
     );
     expect(tA.items.length).toEqual(2 * sample.length);
+  });
+
+  test("sorts by end date, ascending", () => {
+    const tA = new TimelineArray();
+    tA.addStandardizedItems(sample, sampleFunctions);
+
+    const sortedSample = sample.sort(sortByEndDate);
+
+    sortedSample.forEach((item, idx) => {
+      expect(tA.items[idx].timelineTitle).toEqual(item.myTitle);
+    });
   });
 
   test("throws an error if insufficent arguments added", () => {
@@ -133,7 +155,7 @@ describe("it should store items", () => {
       sampleFunctions
     );
     expect(tA.latestDate.valueOf()).toEqual(
-      new Date("2020-04-15T04:00:00.000Z").valueOf()
+      new Date("2020-11-07T04:00:00.000Z").valueOf()
     );
   });
 
@@ -142,6 +164,6 @@ describe("it should store items", () => {
       sample,
       sampleFunctions
     );
-    expect(tA.duration().valueOf()).toEqual(126255600001);
+    expect(tA.duration().valueOf()).toEqual(144054000001);
   });
 });
