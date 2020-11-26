@@ -50,7 +50,7 @@ describe("hides and shows details", () => {
     expect(accordion).toHaveAttribute("aria-expanded", "true");
   });
 
-  test("toggles showing details when clicking title", () => {
+  test("toggles showing details when clicking title", async () => {
     render(
       <WithProviders initialDisplayOptionsState={{ showDetails: false }}>
         <ResumeSection>{sampleContent}</ResumeSection>
@@ -59,8 +59,12 @@ describe("hides and shows details", () => {
     const accordion = screen.getByRole("button");
     expect(accordion).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(accordion);
-    waitFor(expect(accordion).toHaveAttribute("aria-expanded", "true"));
+    await waitFor(() =>
+      expect(accordion).toHaveAttribute("aria-expanded", "true")
+    );
     fireEvent.click(accordion);
-    waitFor(expect(accordion).toHaveAttribute("aria-expanded", "false"));
+    await waitFor(() =>
+      expect(accordion).toHaveAttribute("aria-expanded", "false")
+    );
   });
 });

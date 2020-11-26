@@ -17,7 +17,5 @@ export const timelineConfigReducer = (state, action) => {
       ...state,
       [action.type]: action.value
     };
-  } else {
-    throw new Error();
   }
 };

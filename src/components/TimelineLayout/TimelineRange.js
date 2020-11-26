@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import cx from "classnames";
 import { DisplayOptionsContext } from "../../Contexts";
 import { useTimelineStyles } from "./TimelineStyles";
@@ -16,6 +16,19 @@ const TimelineRange = ({
   const classes = useTimelineStyles({ ...displayOptions, type });
   const infoBoxRef = useRef(null);
 
+  const selectThisRange = () => {
+    selectRange(timelineItem.key);
+  };
+
+  useEffect(() => {
+    if (addInfoBoxRef) {
+      addInfoBoxRef(infoBoxRef);
+    }
+  }, [addInfoBoxRef, infoBoxRef]);
+
+  if (!timelineItem) {
+    return null;
+  }
   const offset = timelineItem.timelineOverlap
     ? timelineItem.timelineOverlap + 1
     : 1;
@@ -26,14 +39,6 @@ const TimelineRange = ({
   const adjustedY2 = y1 === y2 ? y1 + 5 : y2;
   const midY = (y1 + y2) / 2;
   const initialTextY = midY - 30;
-
-  const selectThisRange = useCallback(() => {
-    selectRange(timelineItem.key);
-  }, [selectRange, timelineItem.key]);
-
-  useEffect(() => {
-    addInfoBoxRef(infoBoxRef);
-  }, [addInfoBoxRef, infoBoxRef]);
 
   return (
     <g

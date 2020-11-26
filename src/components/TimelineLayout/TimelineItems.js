@@ -52,6 +52,9 @@ const TimelineItems = () => {
 
   const findOverlappingRef = useCallback(
     (ref, otherRefs, simulatedBox = null) => {
+      if (!ref.current || !ref.current.getBBox) {
+        return undefined;
+      }
       const bBox = simulatedBox || ref.current.getBBox();
       const overlapsWith = otherRefs.find(
         (otherRef) =>

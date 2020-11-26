@@ -80,12 +80,12 @@ class TimelineArray extends Array {
   addStandardizedItems = (
     incomingItems,
     {
-      type: typeFunc,
-      title: titleFunc,
-      subtitle: subtitleFunc,
-      from: fromFunc,
-      to: toFunc
-    }
+      type: typeFunc = (item) => item.type,
+      title: titleFunc = (item) => item.title,
+      subtitle: subtitleFunc = (item) => item.subtitle,
+      from: fromFunc = (item) => item.from,
+      to: toFunc = (item) => item.to
+    } = {}
   ) => {
     if (!incomingItems) {
       return this;

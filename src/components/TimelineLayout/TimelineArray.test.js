@@ -3,6 +3,7 @@ import TimelineArray from "./TimelineArray";
 const sample = [
   {
     myTitle: "some title",
+    myType: "some category",
     mySubtitle: "some subtitle",
     myStart: "2020-04-15T04:00:00.000Z",
     myEnd: "2019-05-28T04:00:00.000Z"
@@ -27,6 +28,7 @@ const sortByEndDate = (a, b) => {
 
 const sampleFunctions = {
   title: (item) => item.myTitle,
+  type: (item) => item.myType,
   subtitle: (item) => item.mySubitle,
   from: (item) => new Date(item.myStart),
   to: (item) => new Date(item.myEnd)
@@ -74,17 +76,6 @@ describe("it should store items", () => {
     sortedSample.forEach((item, idx) => {
       expect(tA.items[idx].timelineTitle).toEqual(item.myTitle);
     });
-  });
-
-  test("throws an error if insufficent arguments added", () => {
-    const tA = new TimelineArray();
-    let exception;
-    try {
-      tA.addStandardizedItems(sample);
-    } catch (e) {
-      exception = e;
-    }
-    expect(exception).not.toBeUndefined();
   });
 
   test("throws an error if invalid arguments added", () => {
@@ -137,6 +128,22 @@ describe("it should store items", () => {
     });
 
     expect(tA.items.length).toEqual(0);
+  });
+
+  test("uses default functions for properties of same name, if not provided", () => {
+    const tA = new TimelineArray();
+    tA.addStandardizedItems([
+      {
+        title: "some title",
+        subtitle: "some subtitle",
+        type: "some type",
+        from: new Date(),
+        to: new Date()
+      }
+    ]);
+
+    expect(tA.items.length).toEqual(1);
+    expect(tA.items[0].title).toBe("some title");
   });
 
   test("calculates the earliest received date", () => {
