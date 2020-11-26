@@ -19,12 +19,13 @@
     "react-scripts": "3.4.3"
   },
   "devDependencies": {
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "typescript": "3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
   "browserslist": [
