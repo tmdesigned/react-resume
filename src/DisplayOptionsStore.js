@@ -13,6 +13,6 @@ export const displayOptionsReducer = (state, action) => {
     case "toggleDark":
       return { ...state, dark: !state.dark };
     default:
-      throw new Error();
+      return { ...state };
   }
 };

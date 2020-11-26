@@ -135,7 +135,7 @@ describe("has a working 'show details' toggle", () => {
     });
   });
 
-  describe("has a working  timeline' toggle", () => {
+  describe("has a working timeline' toggle", () => {
     test("renders a detaitimelinels toggle", () => {
       render(
         <WithProviders>
