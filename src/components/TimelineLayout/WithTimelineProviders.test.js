@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithTimelineProviders from "./WithTimelineProviders";
 import {
@@ -30,7 +30,7 @@ describe("loads and displays output", () => {
   });
 
   test("exposes TimelineConfigContext", () => {
-    const { getByText } = render(
+    render(
       <WithTimelineProviders>
         <TimelineConfigContext.Consumer>
           {(value) => (value ? "true" : "false")}
@@ -38,11 +38,11 @@ describe("loads and displays output", () => {
       </WithTimelineProviders>
     );
 
-    expect(getByText("true")).toBeInTheDocument();
+    expect(screen.getByText("true")).toBeInTheDocument();
   });
 
   test("exposes DispatchTimelineConfigContext", () => {
-    const { getByText } = render(
+    render(
       <WithTimelineProviders>
         <DispatchTimelineConfigContext.Consumer>
           {(value) => (value ? "true" : "false")}
@@ -50,11 +50,11 @@ describe("loads and displays output", () => {
       </WithTimelineProviders>
     );
 
-    expect(getByText("true")).toBeInTheDocument();
+    expect(screen.getByText("true")).toBeInTheDocument();
   });
 
   test("updates TimelineConfigContext when DispatchTimelineConfigContext dispatches a new value", async () => {
-    const { getByTestId } = render(
+    render(
       <WithTimelineProviders initialTimelineConfig={sampleConfig}>
         <TimelineConfigContext.Consumer>
           {(timelineConfig) => (
@@ -78,19 +78,19 @@ describe("loads and displays output", () => {
       </WithTimelineProviders>
     );
 
-    expect(getByTestId("value")).toHaveTextContent(sampleConfig.height);
+    expect(screen.getByTestId("value")).toHaveTextContent(sampleConfig.height);
     try {
-      fireEvent.click(getByTestId("dispatch"));
+      fireEvent.click(screen.getByTestId("dispatch"));
     } catch (e) {}
     await waitFor(() => {
-      expect(getByTestId("value")).toHaveTextContent("50");
+      expect(screen.getByTestId("value")).toHaveTextContent("50");
     });
   });
 });
 
 describe("dateToYOffset", () => {
   test("exists on TimelineConfigcontext", () => {
-    const { getByText } = render(
+    render(
       <WithTimelineProviders>
         <TimelineConfigContext.Consumer>
           {(value) => (value.dateToYOffset ? "true" : "false")}
@@ -98,11 +98,11 @@ describe("dateToYOffset", () => {
       </WithTimelineProviders>
     );
 
-    expect(getByText("true")).toBeInTheDocument();
+    expect(screen.getByText("true")).toBeInTheDocument();
   });
 
   test("provides appropriate values", () => {
-    const { getByTestId } = render(
+    render(
       <WithTimelineProviders initialTimelineConfig={sampleConfig}>
         <TimelineConfigContext.Consumer>
           {(value) => (
@@ -128,15 +128,15 @@ describe("dateToYOffset", () => {
       </WithTimelineProviders>
     );
 
-    expect(getByTestId("start")).toHaveTextContent("1000");
-    expect(getByTestId("quarter")).toHaveTextContent("750");
-    expect(getByTestId("mid")).toHaveTextContent("500");
-    expect(getByTestId("three")).toHaveTextContent("250");
-    expect(getByTestId("end")).toHaveTextContent("0");
+    expect(screen.getByTestId("start")).toHaveTextContent("1000");
+    expect(screen.getByTestId("quarter")).toHaveTextContent("750");
+    expect(screen.getByTestId("mid")).toHaveTextContent("500");
+    expect(screen.getByTestId("three")).toHaveTextContent("250");
+    expect(screen.getByTestId("end")).toHaveTextContent("0");
   });
 
   test("returns 0 if no duration", () => {
-    const { getByTestId } = render(
+    render(
       <WithTimelineProviders
         initialTimelineConfig={{
           ...sampleConfig,
@@ -155,6 +155,6 @@ describe("dateToYOffset", () => {
       </WithTimelineProviders>
     );
 
-    expect(getByTestId("start")).toHaveTextContent("0");
+    expect(screen.getByTestId("start")).toHaveTextContent("0");
   });
 });

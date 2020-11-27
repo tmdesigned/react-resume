@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
@@ -60,7 +60,7 @@ describe("loads and displays output", () => {
   });
 
   test("renders meta information for each education item", () => {
-    const { getAllByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     const metaKeys = [
       "degreeDescription",
       "degree",
@@ -72,7 +72,7 @@ describe("loads and displays output", () => {
       metaKeys.forEach((metaKey) => {
         let exception;
         try {
-          getAllByText(educationItem[metaKey]); // allow 1+
+          screen.getAllByText(educationItem[metaKey]); // allow 1+
         } catch (e) {
           exception = e;
         }
@@ -92,22 +92,22 @@ describe("loads and displays output", () => {
   });
 
   test("renders composite degree phrase", () => {
-    const { getByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     samplePerson.education.forEach((educationItem) => {
       const regEx = new RegExp(
         escapeRegExp(
           `${educationItem.degreeDescription} in ${educationItem.department}`
         )
       );
-      expect(getByText(regEx)).toBeInTheDocument();
+      expect(screen.getByText(regEx)).toBeInTheDocument();
     });
   });
 
   test("does not render degree phrase if no degree info", () => {
-    const { getByText } = renderWithPersonProvider({ education: [{ id: 0 }] });
+    renderWithPersonProvider({ education: [{ id: 0 }] });
     let exception;
     try {
-      getByText(/Degree.*in/);
+      screen.getByText(/Degree.*in/);
     } catch (e) {
       exception = e;
     }
@@ -115,19 +115,19 @@ describe("loads and displays output", () => {
   });
 
   test("renders primary focus area phrase", () => {
-    const { getByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     samplePerson.education.forEach((educationItem) => {
       expect(
-        getByText(`Primary focus: ${educationItem.primaryArea}`)
+        screen.getByText(`Primary focus: ${educationItem.primaryArea}`)
       ).toBeInTheDocument();
     });
   });
 
   test("does not render 'Primary focus' if none given", () => {
-    const { getByText } = renderWithPersonProvider({ education: [{ id: 0 }] });
+    renderWithPersonProvider({ education: [{ id: 0 }] });
     let exception;
     try {
-      getByText(/Primary focus/);
+      screen.getByText(/Primary focus/);
     } catch (e) {
       exception = e;
     }
@@ -135,19 +135,19 @@ describe("loads and displays output", () => {
   });
 
   test("renders secondary focus area phrase", () => {
-    const { getByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     samplePerson.education.forEach((educationItem) => {
       expect(
-        getByText(`Secondary focus: ${educationItem.secondaryArea}`)
+        screen.getByText(`Secondary focus: ${educationItem.secondaryArea}`)
       ).toBeInTheDocument();
     });
   });
 
   test("does not render 'Secondary focus' if none given", () => {
-    const { getByText } = renderWithPersonProvider({ education: [{ id: 0 }] });
+    renderWithPersonProvider({ education: [{ id: 0 }] });
     let exception;
     try {
-      getByText(/Secondary focus/);
+      screen.getByText(/Secondary focus/);
     } catch (e) {
       exception = e;
     }
@@ -155,19 +155,19 @@ describe("loads and displays output", () => {
   });
 
   test("renders distinction phrase", () => {
-    const { getByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     samplePerson.education.forEach((educationItem) => {
       expect(
-        getByText(`Graduated ${educationItem.distinction}`)
+        screen.getByText(`Graduated ${educationItem.distinction}`)
       ).toBeInTheDocument();
     });
   });
 
   test("does not render 'Graduated' if no distinction given", () => {
-    const { getByText } = renderWithPersonProvider({ education: [{ id: 0 }] });
+    renderWithPersonProvider({ education: [{ id: 0 }] });
     let exception;
     try {
-      getByText(/Graduated/);
+      screen.getByText(/Graduated/);
     } catch (e) {
       exception = e;
     }

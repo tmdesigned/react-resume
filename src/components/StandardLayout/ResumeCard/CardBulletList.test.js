@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import CardBulletList from "./CardBulletList";
 
@@ -21,9 +21,9 @@ describe("loads and displays output", () => {
   });
 
   test("renders each bullet", () => {
-    const { getByText } = render(<CardBulletList bullets={items} />);
+    render(<CardBulletList bullets={items} />);
     items.forEach((item) => {
-      expect(getByText(item)).toBeInTheDocument();
+      expect(screen.getByText(item)).toBeInTheDocument();
     });
   });
 });

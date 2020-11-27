@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
@@ -54,13 +54,13 @@ describe("loads and displays output", () => {
   });
 
   test("renders meta information for each experience item", () => {
-    const { getAllByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     const metaKeys = ["company", "department", "city", "state"];
     samplePerson.experience.forEach((experienceItem) => {
       metaKeys.forEach((metaKey) => {
         let exception;
         try {
-          getAllByText(experienceItem[metaKey]); // allow 1+
+          screen.getAllByText(experienceItem[metaKey]); // allow 1+
         } catch (e) {
           exception = e;
         }
@@ -92,10 +92,10 @@ describe("loads and displays output", () => {
   });
 
   test("renders responsibility items", () => {
-    const { getByText } = renderWithPersonProvider(samplePerson);
+    renderWithPersonProvider(samplePerson);
     samplePerson.experience.forEach((experienceItem) => {
       experienceItem.responsibilities.forEach((responsibility) => {
-        expect(getByText(responsibility)).toBeInTheDocument();
+        expect(screen.getByText(responsibility)).toBeInTheDocument();
       });
     });
   });
