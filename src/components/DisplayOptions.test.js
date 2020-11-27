@@ -70,31 +70,31 @@ describe("has a working dark mode toggle", () => {
 
 describe("has a working 'show details' toggle", () => {
   test("renders a details toggle", () => {
-    render(
+    const { getByTestId } = render(
       <WithProviders>
         <DisplayOptions />
       </WithProviders>
     );
-    expect(screen.getByTestId("toggle-details")).toBeInTheDocument();
+    expect(getByTestId("toggle-details")).toBeInTheDocument();
   });
 
   test("defaults to inactive", () => {
-    render(
+    const { getByTestId } = render(
       <WithProviders>
         <DisplayOptions />
       </WithProviders>
     );
-    const button = screen.getByTestId("toggle-details");
+    const button = getByTestId("toggle-details");
     expect(button).toHaveAttribute("aria-pressed", "false");
   });
 
   test("switches to inactive when pressed", async () => {
-    render(
+    const { getByTestId } = render(
       <WithProviders>
         <DisplayOptions />
       </WithProviders>
     );
-    const button = screen.getByTestId("toggle-details");
+    const button = getByTestId("toggle-details");
     expect(button).toHaveAttribute("aria-pressed", "false");
     fireEvent.click(button);
     await waitFor(() => expect(button).toHaveAttribute("aria-pressed", "true"));
@@ -104,7 +104,7 @@ describe("has a working 'show details' toggle", () => {
     const sampleResumeCard = {
       bullets: ["Alpha", "Bravo"]
     };
-    render(
+    const { getByText, getByTestId } = render(
       <WithProviders>
         <DisplayOptions />
         <ResumeCard bullets={sampleResumeCard.bullets} />
@@ -112,16 +112,16 @@ describe("has a working 'show details' toggle", () => {
     );
 
     sampleResumeCard.bullets.forEach((bullet) => {
-      expect(screen.getByText(bullet)).toBeInTheDocument();
-      expect(screen.getByText(bullet)).not.toBeVisible();
+      expect(getByText(bullet)).toBeInTheDocument();
+      expect(getByText(bullet)).not.toBeVisible();
     });
 
-    const button = screen.getByTestId("toggle-details");
+    const button = getByTestId("toggle-details");
     fireEvent.click(button);
 
     await waitFor(() => {
       sampleResumeCard.bullets.forEach((bullet) => {
-        expect(screen.getByText(bullet)).toBeVisible();
+        expect(getByText(bullet)).toBeVisible();
       });
     });
 
@@ -129,39 +129,39 @@ describe("has a working 'show details' toggle", () => {
 
     await waitFor(() => {
       sampleResumeCard.bullets.forEach((bullet) => {
-        expect(screen.getByText(bullet)).toBeInTheDocument();
-        expect(screen.getByText(bullet)).not.toBeVisible();
+        expect(getByText(bullet)).toBeInTheDocument();
+        expect(getByText(bullet)).not.toBeVisible();
       });
     });
   });
 
   describe("has a working timeline' toggle", () => {
     test("renders a detaitimelinels toggle", () => {
-      render(
+      const { getByTestId } = render(
         <WithProviders>
           <DisplayOptions />
         </WithProviders>
       );
-      expect(screen.getByTestId("toggle-timeline")).toBeInTheDocument();
+      expect(getByTestId("toggle-timeline")).toBeInTheDocument();
     });
 
     test("defaults to inactive", () => {
-      render(
+      const { getByTestId } = render(
         <WithProviders>
           <DisplayOptions />
         </WithProviders>
       );
-      const button = screen.getByTestId("toggle-timeline");
+      const button = getByTestId("toggle-timeline");
       expect(button).toHaveAttribute("aria-pressed", "false");
     });
 
     test("switches to active when pressed", async () => {
-      render(
+      const { getByTestId } = render(
         <WithProviders>
           <DisplayOptions />
         </WithProviders>
       );
-      const button = screen.getByTestId("toggle-timeline");
+      const button = getByTestId("toggle-timeline");
       expect(button).toHaveAttribute("aria-pressed", "false");
       fireEvent.click(button);
       await waitFor(() =>

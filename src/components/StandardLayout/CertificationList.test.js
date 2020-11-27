@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
@@ -47,13 +47,13 @@ describe("loads and displays output", () => {
   });
 
   test("renders meta information for each certification item", () => {
-    renderWithPersonProvider(samplePerson);
+    const { getAllByText } = renderWithPersonProvider(samplePerson);
     const metaKeys = ["organization"];
     samplePerson.certifications.forEach((certificationItem) => {
       metaKeys.forEach((metaKey) => {
         let exception;
         try {
-          screen.getAllByText(certificationItem[metaKey]); // allow 1+
+          getAllByText(certificationItem[metaKey]); // allow 1+
         } catch (e) {
           exception = e;
         }
@@ -75,10 +75,10 @@ describe("loads and displays output", () => {
   });
 
   test("renders competency items", () => {
-    renderWithPersonProvider(samplePerson);
+    const { getByText } = renderWithPersonProvider(samplePerson);
     samplePerson.certifications.forEach((certificationItem) => {
       certificationItem.competencies.forEach((competency) => {
-        expect(screen.getByText(competency)).toBeInTheDocument();
+        expect(getByText(competency)).toBeInTheDocument();
       });
     });
   });

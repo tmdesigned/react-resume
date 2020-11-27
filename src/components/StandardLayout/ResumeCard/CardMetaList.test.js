@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import CardMetaList from "./CardMetaList";
 
@@ -21,9 +21,9 @@ describe("loads and displays output", () => {
   });
 
   test("renders each list item", () => {
-    render(<CardMetaList items={items} />);
+    const { getByText } = render(<CardMetaList items={items} />);
     Object.keys(items).forEach((itemKey) => {
-      expect(screen.getByText(items[itemKey])).toBeInTheDocument();
+      expect(getByText(items[itemKey])).toBeInTheDocument();
     });
   });
 });

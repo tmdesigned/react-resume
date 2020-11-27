@@ -22,5 +22,7 @@ describe("it generates a mui theme", () => {
   test("accepts an optional 'type' param", () => {
     const myTheme = theme({ type: "dark" });
     expect(myTheme.palette.type).toEqual("dark");
+    const myLightTheme = theme({ type: "light" });
+    expect(myLightTheme.palette.type).toEqual("light");
   });
 });

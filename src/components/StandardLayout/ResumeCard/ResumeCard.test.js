@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ResumeCard from "./ResumeCard";
 import WithProviders from "../../../WithProviders";
@@ -24,22 +24,22 @@ describe("loads and displays output with details hidden", () => {
   });
 
   test("renders the title", () => {
-    render(
+    const { getByText } = render(
       <WithProviders>
         <ResumeCard title={sample.title} />
       </WithProviders>
     );
-    expect(screen.getByText(sample.title)).toBeInTheDocument();
+    expect(getByText(sample.title)).toBeInTheDocument();
   });
 
   test("renders the meta info", () => {
-    render(
+    const { getByText } = render(
       <WithProviders>
         <ResumeCard meta={sample.meta} />
       </WithProviders>
     );
     Object.keys(sample.meta).forEach((key) => {
-      expect(screen.getByText(sample.meta[key])).toBeInTheDocument();
+      expect(getByText(sample.meta[key])).toBeInTheDocument();
     });
   });
 
@@ -58,26 +58,26 @@ describe("loads and displays output with details hidden", () => {
   });
 
   test("hides bullets when displayOptions.showDetails is false", () => {
-    render(
+    const { getByText } = render(
       <WithProviders initialDisplayOptionsState={{ showDetails: false }}>
         <ResumeCard bullets={sample.bullets} />
       </WithProviders>
     );
     sample.bullets.forEach((bullet) => {
-      expect(screen.getByText(bullet)).toBeInTheDocument();
-      expect(screen.getByText(bullet)).not.toBeVisible();
+      expect(getByText(bullet)).toBeInTheDocument();
+      expect(getByText(bullet)).not.toBeVisible();
     });
   });
 
   test("shows bullets when displayOptions.showDetails is true", () => {
-    render(
+    const { getByText } = render(
       <WithProviders initialDisplayOptionsState={{ showDetails: true }}>
         <ResumeCard bullets={sample.bullets} />
       </WithProviders>
     );
     sample.bullets.forEach((bullet) => {
-      expect(screen.getByText(bullet)).toBeInTheDocument();
-      expect(screen.getByText(bullet)).toBeVisible();
+      expect(getByText(bullet)).toBeInTheDocument();
+      expect(getByText(bullet)).toBeVisible();
     });
   });
 });

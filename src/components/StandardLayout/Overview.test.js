@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
@@ -34,7 +34,7 @@ describe("loads and displays output", () => {
   });
 
   test("displays the first name, last name, email, and summary", () => {
-    render(
+    const { getByText } = render(
       <WithProviders>
         <PersonContext.Provider value={samplePerson}>
           <Overview />
@@ -43,9 +43,9 @@ describe("loads and displays output", () => {
     );
 
     expect(
-      screen.getByText(`${samplePerson.firstName} ${samplePerson.lastName}`)
+      getByText(`${samplePerson.firstName} ${samplePerson.lastName}`)
     ).toBeInTheDocument();
-    expect(screen.getByText(samplePerson.email)).toBeInTheDocument();
-    expect(screen.getByText(samplePerson.summary)).toBeInTheDocument();
+    expect(getByText(samplePerson.email)).toBeInTheDocument();
+    expect(getByText(samplePerson.summary)).toBeInTheDocument();
   });
 });
