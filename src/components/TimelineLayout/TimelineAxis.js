@@ -22,6 +22,7 @@ const TimelineAxis = () => {
     <g>
       <line
         className={classes.timeline}
+        data-testid="timeline-axis-line"
         x1="0"
         y1={timelineConfig.topAndBottomOffset}
         x2="0"

@@ -4,25 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
 import CertificationList from "./CertificationList";
-
-const samplePerson = {
-  certifications: [
-    {
-      id: 2,
-      title: "Master Typist",
-      organization: "Typing Skills Institute of America",
-      earned: "2020-10-01T16:00:00.000Z",
-      competencies: ["Typing really fast.", "Not having typing errors."]
-    },
-    {
-      id: 1,
-      title: "Computer User",
-      organization: "Basic Skills Academy",
-      earned: "2019-10-01T16:00:00.000Z",
-      competencies: ["Turning computer on.", "Knowing how to reset computer."]
-    }
-  ]
-};
+import samplePerson from "../../person.test.json";
 
 const renderWithPersonProvider = (providerValue) =>
   render(

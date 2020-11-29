@@ -4,32 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
 import ExperienceList from "./ExperienceList";
-
-const samplePerson = {
-  experience: [
-    {
-      id: 2,
-      title: "Vice President",
-      department: "Sales",
-      company: "Cincinnati Prime Steak Company",
-      city: "Cincinnati",
-      state: "OH",
-      from: "2020-04-15T04:00:00.000Z",
-      responsibilities: ["Sells steaks", "Trains others to sell steaks."]
-    },
-    {
-      id: 1,
-      title: "Salesperson",
-      department: "Sales",
-      company: "Cincinnati Prime Steak Company",
-      city: "Cincinnati",
-      state: "OH",
-      from: "2010-03-20T12:00:00.000Z",
-      to: "2020-04-15T04:00:00.000Z",
-      responsibilities: ["Tries to sell steaks.", "Samples unsold steaks."]
-    }
-  ]
-};
+import samplePerson from "../../person.test.json";
 
 const renderWithPersonProvider = (providerValue) =>
   render(

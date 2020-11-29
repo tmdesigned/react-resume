@@ -5,37 +5,7 @@ import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
 import EducationList from "./EducationList";
 import { escapeRegExp } from "../../util/helpers";
-
-const samplePerson = {
-  education: [
-    {
-      id: 2,
-      degree: "D.D.S.",
-      degreeDescription: "Doctor of Dental Science",
-      department: "Medicine",
-      primaryArea: "Teeth",
-      secondaryArea: "Gums",
-      institution: "Ohio Dental Academy",
-      city: "Amelia",
-      state: "OH",
-      earned: "2020-05-15T16:00:00.000Z",
-      distinction: "Cum Laude"
-    },
-    {
-      id: 1,
-      degree: "B.S.",
-      degreeDescription: "Bachelor of Science",
-      department: "Biology",
-      primaryArea: "Pre-Medicine",
-      secondaryArea: "Dental Sales",
-      institution: "University of Cincinnati",
-      city: "Cincinnati",
-      state: "OH",
-      earned: "2016-05-15T16:00:00.000Z",
-      distinction: "Summa Cum Laude"
-    }
-  ]
-};
+import samplePerson from "../../person.test.json";
 
 const renderWithPersonProvider = (providerValue) =>
   render(
