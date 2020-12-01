@@ -22,7 +22,9 @@ describe("loads and displays output", () => {
   test("renders", () => {
     render(
       <WithTimelineProviders>
-        <TimelineAxis />
+        <svg>
+          <TimelineAxis />
+        </svg>
       </WithTimelineProviders>
     );
   });
@@ -30,7 +32,9 @@ describe("loads and displays output", () => {
   test("renders only the current year when using default", () => {
     render(
       <WithTimelineProviders>
-        <TimelineAxis />
+        <svg>
+          <TimelineAxis />
+        </svg>
       </WithTimelineProviders>
     );
 
@@ -44,7 +48,9 @@ describe("loads and displays output", () => {
   test("renders the 90s", () => {
     render(
       <WithTimelineProviders initialTimelineConfig={config90s}>
-        <TimelineAxis />
+        <svg>
+          <TimelineAxis />
+        </svg>
       </WithTimelineProviders>
     );
 
@@ -58,7 +64,9 @@ describe("loads and displays output", () => {
   test("includes a line of configured height", () => {
     render(
       <WithTimelineProviders>
-        <TimelineAxis />
+        <svg>
+          <TimelineAxis />
+        </svg>
       </WithTimelineProviders>
     );
 
