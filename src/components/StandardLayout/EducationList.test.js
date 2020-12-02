@@ -5,7 +5,9 @@ import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
 import EducationList from "./EducationList";
 import { escapeRegExp } from "../../util/helpers";
-import samplePerson from "../../person.test.json";
+import samplePeople from "../../mocks/people.json";
+
+const samplePerson = samplePeople[0];
 
 const renderWithPersonProvider = (providerValue) =>
   render(

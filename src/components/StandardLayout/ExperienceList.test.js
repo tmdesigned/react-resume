@@ -4,7 +4,9 @@ import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
 import ExperienceList from "./ExperienceList";
-import samplePerson from "../../person.test.json";
+import samplePeople from "../../mocks/people.json";
+
+const samplePerson = samplePeople[0];
 
 const renderWithPersonProvider = (providerValue) =>
   render(

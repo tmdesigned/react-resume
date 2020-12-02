@@ -1,9 +1,14 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../WithProviders";
 import Resume from "./Resume";
 import people from "../mocks/people.json";
+import { server } from "../mocks/server";
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 describe("loads and displays output", () => {
   beforeEach(() => {
@@ -14,8 +19,9 @@ describe("loads and displays output", () => {
     );
   });
 
-  test("renders loading message", () => {
+  test("renders loading message until loaded", async () => {
     screen.getByText(/Loading/i);
+    await waitFor( () => expect(screen.queryByText(/Loading/i)).toBeNull() );
   });
 
   test("renders display options", async () => {

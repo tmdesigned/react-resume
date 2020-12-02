@@ -4,13 +4,9 @@ import "@testing-library/jest-dom/extend-expect";
 import WithProviders from "../../WithProviders";
 import { PersonContext } from "../../Contexts";
 import Overview from "./Overview";
+import samplePeople from "../../mocks/people.json";
 
-const samplePerson = {
-  firstName: "John",
-  lastName: "Doe",
-  email: "john.doe@mail.com",
-  summary: "John Doe is an unidentified male."
-};
+const samplePerson = samplePeople[0];
 
 describe("loads and displays output", () => {
   test("renders", () => {

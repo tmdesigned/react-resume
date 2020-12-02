@@ -5,7 +5,9 @@ import WithProviders from "../../WithProviders";
 import WithTimelineProviders from "./WithTimelineProviders";
 import Timeline from "./Timeline";
 import { PersonContext } from "../../Contexts";
-import samplePerson from "../../person.test.json";
+import samplePeople from "../../mocks/people.json";
+
+const samplePerson = samplePeople[0];
 
 describe("loads and displays output", () => {
   beforeEach(() => {
