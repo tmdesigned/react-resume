@@ -30,25 +30,21 @@ const Resume = () => {
   }, []);
 
   useEffect(() => {
-    if (!people) {
+    if (!people || people.length === 0) {
       return;
     }
-    const taylor = people.find(
-      (person) => person.firstName === "Taylor" && person.lastName === "Morgan"
-    );
-    if (taylor) {
-      api({
-        method: "GET",
-        path: `/people/${taylor.id}`
+
+    api({
+      method: "GET",
+      path: `/people/${people[0].id}`
+    })
+      .then((res) => {
+        setPerson(res.data);
+        setStatus("");
       })
-        .then((res) => {
-          setPerson(res.data);
-          setStatus("");
-        })
-        .catch((r) => {
-          setStatus(r.toString());
-        });
-    }
+      .catch((r) => {
+        setStatus(r.toString());
+      });
   }, [people]);
 
   if (status) {
