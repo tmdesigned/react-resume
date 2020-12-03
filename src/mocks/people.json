@@ -40,6 +40,7 @@
         "city": "Amelia",
         "state": "OH",
         "earned": "2020-05-15T16:00:00.000Z",
+        "started": "2016-05-16T16:00:00.000Z",
         "distinction": "Cum Laude"
       },
       {
@@ -53,6 +54,7 @@
         "city": "Cincinnati",
         "state": "OH",
         "earned": "2016-05-15T16:00:00.000Z",
+        "started": "2012-05-15T16:00:00.000Z",
         "distinction": "Summa Cum Laude"
       }
     ],
