@@ -30,6 +30,7 @@
     "start-mock": "cross-env REACT_APP_MOCK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "browserslist": [
